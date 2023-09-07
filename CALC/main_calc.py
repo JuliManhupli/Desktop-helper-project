@@ -4,7 +4,7 @@ from calc import Calculator
 
 
 '''
-if __name__ == "__main__":
+def start_calc():
     while True:
         try:
             input_1 = int(input("Enter the first number: "))
