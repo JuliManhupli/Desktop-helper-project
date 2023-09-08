@@ -1,10 +1,11 @@
-from calc import Calculator
+from .calc import Calculator
 
 '''
 
 
 '''
 def start_calc():
+
     while True:
         try:
             input_1 = float(input("Enter the first number: "))
@@ -45,6 +46,18 @@ def start_calc():
         else:
             print("Sorry, invalid choice!")
 
-
-
-start_calc()
+def other_vigets():
+    choice = 1
+    while choice!=0:
+        if choice == 1:
+            print('Open convertor')
+        elif choice==2:
+            print('factorial')
+        elif choice==3:
+            print('fibonaci')
+        elif choice==4:
+            print('fact from your number')
+        elif choice==5:
+            print('Mamkin hacker')
+        elif choice==0:
+            print('exit')
