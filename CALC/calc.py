@@ -44,26 +44,28 @@ class Calculator:
             Calculator.last_operation = self.history_array[-1]
             return a % b
         else:
-            self.history_array.append('div({}, {}) == {}'.format(a, b, a / b))
+            self.history_array.append('div({}, {}) == {}'.format(a, b, round((a / b),3)))
             Calculator.last_operation = self.history_array[-1]
             return a / b
         
 
     def pow(self, a,b):
-        pass
+        '''
+        
+        '''
+        self.history_array.append('pow({}, {}) == {}'.format(a, b, a ** b))
+        Calculator.last_operation = self.history_array[-1]
+        return a ** b
 
 
-    def procent(self, a):
-        pass
-
-
-    def history(self, n):
+    def history(self):
         try:
-            result = self.history_array[-n]
+            result = self.history_array
         except IndexError:
             result = None
         return result
     
     
-    def clear(self): Calculator.last_operation = None
+    def clear(self): 
+        Calculator.last_operation = None
 
