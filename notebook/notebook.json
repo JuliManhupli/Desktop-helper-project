@@ -1,12 +1,16 @@
 {
     "1": {
+        "date_of_creation": "",
         "title": "1",
         "text": "Text",
-        "tags": []
+        "tags": [],
+        "d_day": null
     },
     "2": {
+        "date_of_creation": "",
         "title": "2",
         "text": "wefgjthy",
-        "tags": []
+        "tags": [],
+        "d_day": null
     }
 }
