@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from styles import stylize
 from .classes import Note, Notebook
 
 
@@ -21,7 +23,8 @@ def get_input(prompt, error_message=None):
             if error_message:
                 print(f"{bcolors.FAIL}{error_message}{bcolors.ENDC}")
             else:
-                print(f"{bcolors.FAIL}Field cannot be empty.{bcolors.ENDC}")
+                # print(stylize(f"{bcolors.FAIL}Field cannot be empty.{bcolors.ENDC}"))
+                print(stylize("Field cannot be empty.", "cyan"))
         else:
             return user_input
 
