@@ -1,5 +1,5 @@
-from .calc import Calculator
-
+from calc import Calculator
+from styles import stylize
 '''
 
 
@@ -12,7 +12,7 @@ def start_calc():
             input_2 = float(input("Enter the second number: "))
             break
         except:
-            print('The entered is not numbers')
+            print(stylize('The entered is not numbers','red'))
     print(f"The entered first and second numbers are :{input_1}, {input_2}")
     my_instance = Calculator()
     choice=1
@@ -61,3 +61,6 @@ def other_vigets():
             print('Mamkin hacker')
         elif choice==0:
             print('exit')
+
+if __name__ == '__main__':
+    start_calc()
