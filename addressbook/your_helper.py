@@ -1,5 +1,5 @@
 from tabulate import tabulate
-from classes import AddressBook, Phone, Birthday, Email, Address
+from classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
 
 
 def main():
@@ -30,11 +30,11 @@ def main():
                 if normalized_phone:
                     phones.append(normalized_phone)
                 else:
-                    print("Invalid phone number format. Please enter a valid phone number.")
+                    print(f"{Bcolors.FAIL}Invalid phone number format. Please enter a valid phone number.{Bcolors.ENDC}")
 
             email = input("Enter the email address: ")
             while email and not Email.validate_email(email):
-                print("Invalid email address. Please enter a valid email address.")
+                print(f"{Bcolors.FAIL}Invalid email address. Please enter a valid email address.{Bcolors.ENDC}")
                 email = input("Enter the email address: ")
 
             birthday = input("Enter the birthday (YYYY-MM-DD): ")
@@ -43,7 +43,7 @@ def main():
                     birthday = Birthday(birthday)
                     break
                 except ValueError:
-                    print("Invalid birthday date format. Use YYYY-MM-DD.")
+                    print(f"{Bcolors.FAIL}Invalid birthday date format. Use YYYY-MM-DD.{Bcolors.ENDC}")
                     birthday = input("Enter the birthday (YYYY-MM-DD): ")
 
             address = input("Enter the address: ")
@@ -55,7 +55,7 @@ def main():
                         new_email = Email(email)
                         contact.email = new_email
                     else:
-                        print("Invalid email address. Please enter a valid email address.")
+                        print(f"{Bcolors.FAIL}Invalid email address. Please enter a valid email address.{Bcolors.ENDC}")
                 if birthday:
                     contact.birthday = Birthday(birthday)
                 if address:
@@ -112,7 +112,14 @@ def main():
         elif user_input in ['edit', '4']:
             name = input("Enter the name of the contact to edit: ")
             phone = input("Enter the new phone number (leave empty to keep the same): ")
-            email = input("Enter the new email address (leave empty to keep the same): ")
+            while True:
+                email = input("Enter the new email address (leave empty to keep the same): ")
+                if not email:
+                    break
+                if Email.validate_email(email):
+                    break
+                else:
+                    print(f"{Bcolors.FAIL}Invalid email address. Please enter a valid email address.{Bcolors.ENDC}")
             address = input("Enter the new address (leave empty to keep the same): ")
             ab.edit_contact(name, phone, email, address)
             ab.save_to_csv()
@@ -142,7 +149,7 @@ def main():
 
         elif user_input not in ['add', 'search', 'list', 'edit', 'delete', 'exit', 'show all', 'find', 'upcoming',
                                 'birthday']:
-            print('You did not chose a command. Please, try again :)')
+            print(f'{Bcolors.FAIL}You did not chose a command. Please, try again :){Bcolors.ENDC}')
 
 
 if __name__ == '__main__':
