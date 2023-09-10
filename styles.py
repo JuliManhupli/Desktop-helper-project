@@ -24,8 +24,8 @@ STYLES = {
     'strikethrough': 9
 }
 
-def stylize(text: str,  color: str = '', style: str = '') -> str:
 
+def stylize(text: str, color: str = '', style: str = '') -> str:
     if color:
         text = f"\033[{COLORS[color]}m{text}\033[0m"
 

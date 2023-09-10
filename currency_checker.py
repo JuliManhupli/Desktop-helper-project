@@ -60,6 +60,7 @@ def get_exchange_data(currency_code):
         return None
 
 
+
 if __name__ == "__main__":
     print("Here`s NBU hryvnia exchange rate to foreign currencies")
     currencies = ['USD', 'EUR', 'PLN', 'BYN', 'CNY', 'CZK', 'GBP']
@@ -70,6 +71,7 @@ if __name__ == "__main__":
     for currency in currencies:
         rate, currency_name = get_exchange_data(currency)
         if rate is not None:
+
             exchange_rates.append([stylize(currency_name, "", "bold"), stylize(currency, "green", "bold"),
                                    stylize(rate, "red", "bold")])
 
@@ -77,3 +79,7 @@ if __name__ == "__main__":
 
     table = tabulate(exchange_rates, headers, tablefmt="grid", colalign=colalign)
     print(table)
+
+if __name__ == "__main__":
+    exchange_rate_start()
+

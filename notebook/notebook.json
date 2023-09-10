@@ -1,16 +1,11 @@
 {
-    "1": {
-        "date_of_creation": "",
-        "title": "1",
-        "text": "Text",
-        "tags": [],
-        "d_day": null
-    },
-    "2": {
-        "date_of_creation": "",
-        "title": "2",
-        "text": "wefgjthy",
-        "tags": [],
+    "Title": {
+        "date_of_creation": "2023-09-10",
+        "title": "Title",
+        "text": "5",
+        "tags": [
+            "5"
+        ],
         "d_day": null
     }
 }
