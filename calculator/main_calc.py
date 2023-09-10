@@ -1,7 +1,11 @@
-from .calc import Calculator
 from styles import stylize
 import requests
 
+
+try:
+    from calc import Calculator
+except ModuleNotFoundError:
+    from .calc import Calculator
 '''
 Start the calculator application.
 # python3 -m calculator.main_calc
@@ -48,7 +52,6 @@ def start_calc():
             print("Exit")
         else:
             print("Sorry, invalid choice!")
-
 
 def fact_num(num: str):
     api_url = 'http://numbersapi.com/'
@@ -282,5 +285,7 @@ def main():
             print('exit')
 
 
+
 if __name__ == '__main__':
     convert_units()
+

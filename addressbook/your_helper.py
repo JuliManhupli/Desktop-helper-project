@@ -1,8 +1,13 @@
 from tabulate import tabulate
-from classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
+
+try:
+    from classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
+except ModuleNotFoundError:
+    from .classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
 
 
 def main():
+    ab = AddressBook('addressbook/address_book_data.csv')
     while True:
         print("\nAvailable commands:")
         print("1. 'add' or '1'                    ->  Add a new contact")
@@ -30,7 +35,8 @@ def main():
                 if normalized_phone:
                     phones.append(normalized_phone)
                 else:
-                    print(f"{Bcolors.FAIL}Invalid phone number format. Please enter a valid phone number.{Bcolors.ENDC}")
+                    print(
+                        f"{Bcolors.FAIL}Invalid phone number format. Please enter a valid phone number.{Bcolors.ENDC}")
 
             email = input("Enter the email address: ")
             while email and not Email.validate_email(email):
