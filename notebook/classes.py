@@ -1,10 +1,11 @@
 import json
-import textwrap
-from collections import UserDict
+from collections import UserDict, Counter
 from tabulate import tabulate
 
+
 class Notebook(UserDict):
-    N = 2
+    N = 10
+
     def add_note(self, note):
         self.data[note.title] = note
         self.save_to_json('notebook/notebook.json')
@@ -23,17 +24,32 @@ class Notebook(UserDict):
             print("The notebook is empty")
 
     def sort_notes(self, key):
-        print("sort_notes")
-        if key == 'date':
+        if key == 'Date of creation in ascending order':
             sorted_notes = sorted(self.data.values(), key=lambda note: note.date_of_creation)
-        elif key == 'name':
+        elif key == 'Date of creation in descending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.date_of_creation, reverse=True)
+        elif key == 'Title in order from A to Z':
             sorted_notes = sorted(self.data.values(), key=lambda note: note.title)
+        elif key == 'Title in order from Z to A':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.title, reverse=True)
+
+        elif key == 'Tags in ascending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.tags)
+        elif key == 'Tags in descending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.tags, reverse=True)
+        elif key == 'Tags sorted by word frequency in the list':
+            tag_counts = Counter(tag for note in self.data.values() for tag in note.tags)
+            sorted_notes = sorted(self.data.values(), key=lambda note: sum(tag_counts[tag] for tag in note.tags),
+                                  reverse=True)
+        elif key == 'D-Day in ascending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.d_day or '')
+        elif key == 'D-Day in descending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.d_day or '', reverse=True)
         else:
             return "Invalid sorting key."
 
         self.data = {note.title: note for note in sorted_notes}
         self.show_all()
-        # self.save_to_json('notebook/notebook.json')
 
     def save_to_json(self, filename):
         data = {}
@@ -73,8 +89,6 @@ class Notebook(UserDict):
             print(f"File '{filename}' not found.")
             return cls()
 
-
-
     def __iter__(self):
         self.current_index = 0
         self.values = list(self.data.values())
@@ -100,6 +114,7 @@ class Notebook(UserDict):
             return table
         else:
             raise StopIteration
+
 
 class Note:
     def __init__(self, date_of_creation, title, text, tags=None, d_day=None):

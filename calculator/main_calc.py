@@ -1,7 +1,11 @@
-from .calc import Calculator
 from styles import stylize
 import requests
 
+
+try:
+    from calc import Calculator
+except ModuleNotFoundError:
+    from .calc import Calculator
 '''
 Start the calculator application.
 '''
@@ -49,7 +53,9 @@ def start_calc():
             print("Sorry, invalid choice!")
 
 
+
 def other_vignettes():
+
     choice = 1
     while choice != 0:
         if choice == 1:
@@ -275,4 +281,5 @@ def factorial(n):
 
 if __name__ == '__main__':
     convert_units(int(input('>>')))
+
 

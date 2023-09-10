@@ -1,10 +1,12 @@
 class Calculator:
+
     history_array: list[str] = None  # Class variable to store the history of operations
 
     def __init__(self) -> None:
         self.history_array = []  # Initialize an empty list to store operation history for each instance
 
     last_operation: str | None = None  # Class variable to store the last operation performed
+
 
     @property
     def last(self) -> str | None:
@@ -15,6 +17,7 @@ class Calculator:
             str | None: The last operation in string format, or None if no operations have been performed.
         """
         return Calculator.last_operation
+
 
     def sum(self, a: float, b: float) -> float:
         """
@@ -64,6 +67,7 @@ class Calculator:
         Calculator.last_operation = self.history_array[-1]
         return result
 
+
     def div(self, a: float, b: float, mod: bool = False) -> float:
         """
         Perform division operation and add it to the history.
@@ -82,6 +86,7 @@ class Calculator:
         else:
             result = a / b
             self.history_array.append(f'div({a}, {b}) == {result:.3f}')
+
 
         Calculator.last_operation = self.history_array[-1]
         return result
@@ -116,3 +121,4 @@ class Calculator:
         Clear the last operation.
         """
         Calculator.last_operation = None  # Set the last operation to None
+

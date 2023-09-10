@@ -1,6 +1,7 @@
 import requests
 import json
 
+
 def get_exchange_rate(currency_code):
     # URL of the JSON file
     url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'
@@ -30,7 +31,8 @@ def get_exchange_rate(currency_code):
         print(f"An error has occurred: {e}")
         return None
 
-if __name__ == "__main__":
+
+def exchange_rate_start():
     print("Here currency in NBU rate")
     currencies = ['USD', 'EUR', 'PLN', 'BYN', 'CNY', 'CZK', 'GBP']
 
@@ -40,3 +42,7 @@ if __name__ == "__main__":
             print(f"Ukrainian hryvnia to {currency}: {rate}")
         else:
             print(f"Course {currency} not found or an error occurred.")
+
+
+if __name__ == "__main__":
+    exchange_rate_start()
