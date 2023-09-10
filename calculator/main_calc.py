@@ -8,6 +8,7 @@ except ModuleNotFoundError:
     from .calc import Calculator
 '''
 Start the calculator application.
+# python3 -m calculator.main_calc
 '''
 
 
@@ -52,30 +53,6 @@ def start_calc():
         else:
             print("Sorry, invalid choice!")
 
-
-
-def other_vignettes():
-
-    choice = 1
-    while choice != 0:
-        if choice == 1:
-            print('Open calculator')
-        elif choice == 2:
-            print('Open convertor')
-        elif choice == 3:
-            print('fibonaci/factorial')
-        elif choice == 4:
-            try:
-                num = int(input('Enter number\n>>>'))
-                fact_num(str(num))
-            except:
-                print(stylize('try again', 'red'))
-        elif choice == 5:
-            print('Mamkin hacker')
-        elif choice == 0:
-            print('exit')
-
-
 def fact_num(num: str):
     api_url = 'http://numbersapi.com/'
 
@@ -87,12 +64,11 @@ def fact_num(num: str):
         print(response.status_code)
 
 
-def convert_units(var: int):
+def convert_units():
     """
     Converts between metric and non-metric units for various measurements.
 
     Args:
-        var (int): 1 for metric to non-metric conversion, 2 for non-metric to metric conversion.
 
     Raises:
         ValueError: If an invalid choice is made.
@@ -100,8 +76,16 @@ def convert_units(var: int):
     Example:
         convert_units(1)  # Convert metric to non-metric
     """
-    # var = int(input('1: Ru - Eng\n2: Eng - Ru\n'))
-    while var!=0:
+    a = True
+    while a:
+        try:
+            var = int(input('1 for metric to non-metric conversion,\n 2 for non-metric to metric conversion,\n 0 exit'))
+            a = False
+        except ValueError:
+            print('is not number')
+        except UnboundLocalError:
+            print('is not number')
+    while var != 0:
         if var == 1:
             print('Converting from metric to non-metric')
             conversion_type = int(
@@ -224,7 +208,8 @@ def convert_units(var: int):
             print('exit')
             break
         else:
-            raise ValueError("Invalid choice. Please select either 1 or 2.")
+            print("Invalid choice. Please select either 1 or 2 or 0.")
+            var = 0
 
 
 def fibonacci(n):
@@ -279,7 +264,28 @@ def factorial(n):
     return result
 
 
-if __name__ == '__main__':
-    convert_units(int(input('>>')))
+def main():
+    choice = 1
+    while choice != 0:
+        if choice == 1:
+            print('Open calculator')
+            start_calc()
+        elif choice == 2:
+            print('Open convertor')
+            convert_units()
+        elif choice == 3:
+            print('fibonaci/factorial')
+        elif choice == 4:
+            try:
+                num = int(input('Enter number\n>>>'))
+                fact_num(str(num))
+            except:
+                print(stylize('try again', 'red'))
+        elif choice == 0:
+            print('exit')
 
+
+
+if __name__ == '__main__':
+    convert_units()
 
