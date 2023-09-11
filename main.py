@@ -2,6 +2,7 @@ from addressbook.your_helper import main as addressbook_start
 from notebook.notebook import start as notebook_start
 from calculator.main_calc import start_calc
 from sortfolder.sortfolder import start as sortfolder_start
+from translator.translator import start as translator_start
 from currency_checker import exchange_rate_start
 from styles import stylize
 
@@ -10,6 +11,7 @@ applications = (("Address book", addressbook_start),
                 ("Sort folder", sortfolder_start),
                 ("Calculator", start_calc),
                 ("Exchange rate", exchange_rate_start),
+                ("Translator", translator_start),
                 ("Exit", ""),
                 )
 
