@@ -1,9 +1,10 @@
 from tabulate import tabulate
-try:
-    from classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
-except ModuleNotFoundError:
-    from .classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
+from styles import stylize
 
+try:
+    from classes import AddressBook, Phone, Birthday, Email, Address
+except ModuleNotFoundError:
+    from .classes import AddressBook, Phone, Birthday, Email, Address
 
 
 def main():

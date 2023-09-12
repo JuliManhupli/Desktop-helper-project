@@ -77,15 +77,16 @@ def start() -> None:
     print(stylize("\nWelcome to the Sortfolder!", 'white', 'bold'))
 
     while True:
-        print(stylize('Select a command:', 'white'))
+        print(stylize('Select a command:', '', 'bold'))
         print('1 - Sort folder')
         print('2 - File or folder name normalization')
         print('3 - Unpack an archive')
         print('4 - Return to the main menu')
-        command = input('>>> ')
+        command = input("Enter a command: ").strip()
         if command == '4':
+            print()
             break
         elif command in handler:
             handler[command]()
         else:
-            print(stylize("The command is incorrect", 'red'))
+            print(stylize("The command is incorrect\n", 'red'))

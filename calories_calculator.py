@@ -1,8 +1,10 @@
 from tabulate import tabulate
 
+from styles import stylize
 
 
-def calories_intake_per_day(weight: float, height: float, age: float, human_activity_indicator: float, male_or_female: str):
+def calories_intake_per_day(weight: float, height: float, age: float, human_activity_indicator: float,
+                            male_or_female: str):
     """
         Calculate the daily calorie intake based on user's weight, height, age, activity level, and gender.
 
@@ -46,10 +48,8 @@ def protein_fats_carbohydrates(weight: float, calories: float):
     return proteins, fats, carbohydrates
 
 
-if __name__ == "__main__":
-
-    print("Welcome to the protein, fats, and carbohydrates calculator")
-
+def main():
+    print(stylize("\nWelcome to the protein, fats, and carbohydrates calculator!", 'white', 'bold'))
     print("Okay, now let’s calculate your daily calorie intake ᕦ( ͡° ͜ʖ ͡°)ᕤ")
 
     while True:
@@ -57,7 +57,7 @@ if __name__ == "__main__":
             weight = float(input("Enter your weight (kg): "))
             break  # Exit the loop on successful weight input
         except ValueError:
-            print("Error: Incorrect weight value entered. Please re-enter your weight.")
+            print(stylize("Incorrect weight value entered. Please re-enter your weight.", 'red'))
 
     # Ask for height, age, activity level, and gender
     while True:
@@ -65,39 +65,49 @@ if __name__ == "__main__":
             height = float(input("Enter your height in cm: "))
             break  # Exit the loop on successful height input
         except ValueError:
-            print("Error: Incorrect height value entered. Please re-enter your height.")
+            print(stylize("Incorrect height value entered. Please re-enter your height.", 'red'))
 
     while True:
         try:
             age = float(input("Enter your age: "))
             break  # Exit the loop on successful age input
         except ValueError:
-            print("Error: Incorrect age value entered. Please re-enter your age.")
+            print(stylize("Incorrect age value entered. Please re-enter your age.", 'red'))
 
     male_or_female = None
     while male_or_female not in ["male", "female"]:
         if male_or_female is not None:
-            print("Invalid input. Please enter 'male' or 'female'.")
-        male_or_female = input("Are you a male or a female? (male/female): ").lower()
+            print(stylize("Invalid input. Please enter 'male' or 'female'.", 'red'))
+        male_or_female = input("Are you a male or a female? (male/female): ").lower().strip()
+
+    activity_indicator = (
+        ("almost no activity, sedentary lifestyle, no sports", 1.2),
+        ("low activity. Sedentary lifestyle and some sports - up to three low-intensity workouts per week", 1.375),
+        ("moderate activity. To select this ratio, a person should train three to four times a week, with "
+            "intense but not hard workouts", 1.55),
+        ("high activity. These are daily sports activities or daily work associated with a lot of movement "
+            "and manual labor, e.g., farming", 1.7),
+        ("extreme activity. This is more likely for professional athletes and people with active jobs like "
+            "working with weights, etc.", 1.9),
+    )
 
     while True:
+        print(stylize("Activity indicators:", '', 'bold'))
+        [print(f"{i} - {app[0]}") for i, app in enumerate(activity_indicator, 1)]
+        user_input = input("Enter a number: ")
+
         try:
-            human_activity_indicator = float(input("""
-Enter your activity indicator:
-1.2 - almost no activity, sedentary lifestyle, no sports
-1.375 - low activity. Sedentary lifestyle and some sports - up to three low-intensity workouts per week
-1.55 - moderate activity. To select this ratio, a person should train three to four times a week, with intense but not hard workouts
-1.7 - high activity. These are daily sports activities or daily work associated with a lot of movement and manual labor, e.g., farming
-1.9 - extreme activity. This is more likely for professional athletes and people with active jobs like working with weights, etc.
-Your response: """))
-            break # Exit the loop on successful indicator input
+            human_activity_indicator = activity_indicator[int(user_input) - 1][1]
+            break
+        except IndexError:
+            print(stylize(f"Please enter a number from 1 to {len(activity_indicator)}\n", 'red'))
         except ValueError:
-            print("Error: Incorrect indicator value entered. Please re-enter your age.")
+            print(stylize(f"Please enter a number\n", 'red'))
 
     # Calculate the user's daily calorie intake
     calories = calories_intake_per_day(weight, height, age, human_activity_indicator, male_or_female)
 
-    print(f"Your daily calorie intake is: {calories:.2f} calories")
+    print(stylize(f"Your daily calorie intake is: {calories:.2f} calories", 'green'))
 
     proteins, fats, carbohydrates = protein_fats_carbohydrates(weight, calories)
 
@@ -106,4 +116,4 @@ Your response: """))
     colalign = ("center", "center", "center", "center")
     table = tabulate(data, headers, tablefmt="grid", colalign=colalign)
     print(table)
-    print("NOW LETS GO TO THE GYM!!!")
+    print(stylize("NOW LETS GO TO THE GYM!!!\n", 'cyan'))

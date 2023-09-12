@@ -19,6 +19,7 @@ def translate(from_leng: str, to_leng: str) -> None:
         phrase = input('>>> ')
 
         if phrase.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
+            print()
             break
 
         print(stylize(ts(phrase, from_leng, to_leng).translate(), "cyan"))
@@ -33,6 +34,7 @@ def say_text() -> None:
         phrase = input('>>> ')
 
         if phrase.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
+            print()
             break
 
         talk.speak_up(phrase)
@@ -60,6 +62,7 @@ def start() -> None:
         command = input("Enter a number: ")
 
         if command in ('4', 'back', "exit", "close", 'quit', 'q', '0'):
+            print()
             break
         elif command == '1':
             translate('en', 'uk')
@@ -68,5 +71,5 @@ def start() -> None:
         elif command == '3':
             say_text()
         else:
-            print(stylize("The command is incorrect", 'red'))
+            print(stylize("The command is incorrect.\n", 'red'))
 

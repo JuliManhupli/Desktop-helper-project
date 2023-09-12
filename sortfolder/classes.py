@@ -81,7 +81,7 @@ class NormalizeName:
 
         os.rename(full_file_path, new_full_file_path)
 
-        return file_name + stylize(' was changed to ', 'green') + new_file_name + stylize(' successfully.', 'green')
+        return file_name + stylize(' was changed to ', 'green') + new_file_name + stylize(' successfully.\n', 'green')
 
 
 class UnpackArchive:
@@ -103,7 +103,7 @@ class UnpackArchive:
 
         extension = os.path.splitext(self.archive_path)[1][1:]
 
-        message = stylize('archive ', 'green') + self.archive_path + stylize(' was extracted successfully.', 'green')
+        message = stylize('archive ', 'green') + self.archive_path + stylize(' was extracted successfully.\n', 'green')
 
         if extension == '7z':
             with py7zr.SevenZipFile(self.archive_path, mode='r') as z:
@@ -346,4 +346,4 @@ class SortFolder:
         self.unpack_archives()
         self.delete_empty_folders()
 
-        return stylize("Sorting folder ", 'green') + self.BASE_FOLDER + stylize(" completed.", 'green')
+        return stylize("Sorting folder ", 'green') + self.BASE_FOLDER + stylize(" completed.\n", 'green')

@@ -3,6 +3,8 @@ from notebook.notebook import start as notebook_start
 from calculator.main_calc import main as calculator_start
 from sortfolder.sortfolder import start as sortfolder_start
 from translator.translator import start as translator_start
+from calories_calculator import main as calories_calculator_start
+from weather_forecast import main as weather_forecast_start
 from currency_checker import exchange_rate_start
 from styles import stylize
 
@@ -12,6 +14,8 @@ applications = (("Address book", addressbook_start),
                 ("Calculator", calculator_start),
                 ("Exchange rate", exchange_rate_start),
                 ("Translator", translator_start),
+                ("Weather forecast", weather_forecast_start),
+                ("Calories calculator", calories_calculator_start),
                 ("Exit", ""),
                 )
 

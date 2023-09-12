@@ -62,7 +62,7 @@ def get_exchange_data(currency_code):
 
 
 def exchange_rate_start():
-    print(stylize("Here`s NBU hryvnia exchange rate to foreign currencies", "", 'bold'))
+    print(stylize("\nHere`s NBU hryvnia exchange rate to foreign currencies", "white", 'bold'))
     currencies = ['USD', 'EUR', 'PLN', 'BYN', 'CNY', 'CZK', 'GBP']
     headers = [stylize(header, "yellow", "bold") for header in ["Currency name", "Currency", "Rate"]]
 
