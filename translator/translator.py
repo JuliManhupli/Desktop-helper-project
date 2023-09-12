@@ -38,7 +38,7 @@ def say_text() -> None:
         talk.speak_up(phrase)
 
 
-def start():
+def start() -> None:
     """
     Start the translator interface.
 
