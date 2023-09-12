@@ -2,7 +2,17 @@ from .classes import Translator as ts, Talker as talk
 from styles import stylize
 
 
-def translate(from_leng, to_leng):
+def translate(from_leng: str, to_leng: str) -> None:
+    """
+    Translate text from one language to another.
+
+    Args:
+        from_leng (str): Source language code
+        to_leng (str): Target language code
+
+    Returns:
+        None
+    """
 
     while True:
         print('\nEnter a word or phrase to translate or enter "Back" to return to the previous menu:')
@@ -14,7 +24,8 @@ def translate(from_leng, to_leng):
         print(stylize(ts(phrase, from_leng, to_leng).translate(), "cyan"))
 
 
-def say_text():
+def say_text() -> None:
+    """Speak inputted English text aloud."""
 
     while True:
 
@@ -28,6 +39,15 @@ def say_text():
 
 
 def start():
+    """
+    Start the translator interface.
+
+    This function runs the main loop allowing the user to translate text
+    or have English text spoken aloud.
+
+    Returns:
+        None
+    """
 
     print(stylize("\nWelcome to the Translator!", 'white', 'bold'))
 
@@ -49,8 +69,3 @@ def start():
             say_text()
         else:
             print(stylize("The command is incorrect", 'red'))
-
-
-if __name__ == "__main__":
-
-    start()
