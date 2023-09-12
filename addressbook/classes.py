@@ -1,20 +1,9 @@
 from collections import UserDict
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 import re
 import csv
-
-
-class Bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+from styles import stylize
 
 
 class Field:
@@ -59,7 +48,7 @@ class Phone(Field):
 
         """
         if isinstance(value, str):
-            normalized_value = re.sub(r'[^0-9+]', '', value)
+            normalized_value = re.sub(r'[^\d+\-]+', '', value)
             return normalized_value
         else:
             return value
@@ -151,7 +140,7 @@ class Birthday(Field):
             date_obj = datetime.strptime(value, '%Y-%m-%d')
             return date_obj.strftime('%Y-%m-%d')
         except ValueError:
-            raise ValueError(f"{Bcolors.FAIL}Invalid birthday date format. Use YYYY-MM-DD.{Bcolors.ENDC}")
+            raise ValueError(stylize("Invalid birthday date format. Use YYYY-MM-DD", 'red'))
 
 
 class Address(Field):
@@ -330,7 +319,7 @@ class AddressBook(UserDict):
                     new_email = Email(email)
                     new_contact.email = new_email
                 else:
-                    print(f"{Bcolors.FAIL}Invalid email address. Please enter a valid email address.{Bcolors.ENDC}")
+                    print(stylize("Invalid email address. Please enter a valid email address", 'red'))
                     return
 
             while birthday:
@@ -339,7 +328,7 @@ class AddressBook(UserDict):
                     birthday = Birthday(birthday)
                     break
                 except ValueError:
-                    print(f"{Bcolors.FAIL}Invalid birthday date format. Use YYYY-MM-DD.{Bcolors.ENDC}")
+                    print(stylize("Invalid birthday date format. Use YYYY-MM-DD", 'red'))
                     birthday = input("Enter the birthday (YYYY-MM-DD): ")
 
             self.data[name] = new_contact
