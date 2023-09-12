@@ -13,6 +13,7 @@ currency_translations = {
     'GBP': 'British Pound Sterling',
 }
 
+
 def get_exchange_data(currency_code):
     """
     Retrieves the exchange rate and currency name for a specified currency code
@@ -52,34 +53,32 @@ def get_exchange_data(currency_code):
             return None
 
         else:
-            print(f"Error HTTP: {response.status_code}")
+            print(stylize(f"Error HTTP: {response.status_code}", "red"))
             return None
 
     except Exception as e:
-        print(f"An error has occurred: {e}")
+        print(stylize(f"An error has occurred: {e}", "red"))
         return None
 
 
-
-if __name__ == "__main__":
-    print("Here`s NBU hryvnia exchange rate to foreign currencies")
+def exchange_rate_start():
+    print(stylize("Here`s NBU hryvnia exchange rate to foreign currencies", "", 'bold'))
     currencies = ['USD', 'EUR', 'PLN', 'BYN', 'CNY', 'CZK', 'GBP']
-    headers = [stylize(header, "yellow", "bold")for header in ["Currency name", "Currency", "Rate"]]
+    headers = [stylize(header, "yellow", "bold") for header in ["Currency name", "Currency", "Rate"]]
 
     exchange_rates = []
 
     for currency in currencies:
         rate, currency_name = get_exchange_data(currency)
         if rate is not None:
-
             exchange_rates.append([stylize(currency_name, "", "bold"), stylize(currency, "green", "bold"),
                                    stylize(rate, "red", "bold")])
 
     colalign = ("center", "center", "center")
 
     table = tabulate(exchange_rates, headers, tablefmt="grid", colalign=colalign)
-    print(table)
+    print(table+"\n")
+
 
 if __name__ == "__main__":
     exchange_rate_start()
-

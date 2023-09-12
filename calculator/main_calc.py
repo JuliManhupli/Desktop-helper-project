@@ -280,16 +280,15 @@ def main():
     Returns:
 
     """
-    print(stylize('Calculator is open'))
+    print(stylize("\nWelcome to the calculator!", 'white', 'bold'))
     choice = None
     while choice != 0:
-        print(
-            'Enter number\n 1 - Open calculator\n 2 - Open convertor\n 3 - fibonaci\n 4 - factorial\n 5 - Fact for your number\n'
-            '0 - Exit')
+        print(stylize("Available commands:", '', 'bold'))
+        print("1 - Open calculator\n2 - Open convertor\n3 - Fibonaci\n4 - Factorial\n5 - Fact for your number\n0 - Exit")
         try:
-            choice = int(input(">"))
-        except:
-            print(stylize('is not number', 'red'))
+            choice = int(input("Enter a number: "))
+        except TypeError:
+            print(stylize('Please enter a number', 'red'))
         if choice == 1:
             # print('Open calculator')
             start_calc()
@@ -300,19 +299,19 @@ def main():
             try:
                 num = int(input('Enter number\n>>>'))
                 print(stylize(str(fibonacci(num)), 'green'))
-            except:
+            except TypeError:
                 print(stylize('try again', 'red'))
         elif choice == 4:
             try:
                 num = int(input('Enter number\n>>>'))
                 print(stylize(str(factorial(num)), 'green'))
-            except:
+            except TypeError:
                 print(stylize('try again', 'red'))
         elif choice == 5:
             try:
                 num = int(input('Enter number\n>>>'))
                 fact_num(str(num))
-            except:
+            except TypeError:
                 print(stylize('try again', 'red'))
         elif choice == 0:
             print('exit')
