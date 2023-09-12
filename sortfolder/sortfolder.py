@@ -3,7 +3,9 @@ import os
 from styles import stylize
 
 
-def sort_folder_run():
+def sort_folder_run() -> None:
+    """Prompt user for folder path and run sorting on it"""
+
     while True:
 
         print(
@@ -22,7 +24,9 @@ def sort_folder_run():
         break
 
 
-def normalize_name():
+def normalize_name() -> None:
+    """Prompt user for file/folder path and normalize its name"""
+
     while True:
 
         print(
@@ -40,8 +44,9 @@ def normalize_name():
         print(normalize.rename(path))
         break
 
+def unpack_archive() -> None:
+    """Prompt user for archive path and unpack it"""
 
-def unpack_archive():
     while True:
 
         print('Enter the path to the archive you want to unpack or enter "Back" to return to the previous menu:')
@@ -66,7 +71,9 @@ handler = {
 }
 
 
-def start():
+def start() -> None:
+    """Display welcome and initial command prompt loop"""
+
     print(stylize("\nWelcome to the Sortfolder!", 'white', 'bold'))
 
     while True:

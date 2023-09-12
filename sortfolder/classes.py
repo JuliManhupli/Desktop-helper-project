@@ -27,9 +27,11 @@ CATEGORIES = {'archives': ('zip', 'gz', 'tar', '7z'),
 
 
 class NormalizeName:
+    """Class for normalizing file names."""
 
     @staticmethod
     def get_normal_name(file_name: str) -> str:
+        """Normalize a file name by transliterating and replacing invalid characters."""
 
         correct_characters = ascii_letters + digits + '_'
         file_name, extension = os.path.splitext(file_name)
@@ -44,6 +46,7 @@ class NormalizeName:
 
     @staticmethod
     def check_name_conflict(folder_path: str, name: str) -> str:
+        """Check for name conflicts and resolve by appending counter."""
 
         files = os.listdir(folder_path)
 
@@ -62,6 +65,7 @@ class NormalizeName:
 
     @classmethod
     def rename(cls, full_file_path: str) -> str:
+        """Rename a file by normalizing name and resolving conflicts."""
 
         file_name = os.path.basename(full_file_path)
         file_path = os.path.dirname(full_file_path)
@@ -81,13 +85,16 @@ class NormalizeName:
 
 
 class UnpackArchive:
+    """Class for extracting archive files."""
 
     def __init__(self, archive_path: str) -> None:
+        """Initialize with archive path and destination folder."""
 
         self.archive_path = archive_path
         self.destination_folder_path = os.path.dirname(archive_path)
 
-    def extract(self):
+    def extract(self) -> str:
+        """Extract archive contents to destination folder."""
 
         if not os.path.exists(self.archive_path):
             return stylize('Archive ', 'red') + self.archive_path + stylize(' does not exist.', 'red')
@@ -110,8 +117,11 @@ class UnpackArchive:
 
 
 class SortFolder:
+    """Class for sorting files into categories."""
 
-    def __init__(self, path) -> None:  # path = os.getcwd()
+    def __init__(self, path) -> None:
+        """Initialize with base folder path."""
+
         self.BASE_FOLDER = path
 
     def create_categories(self) -> None:
@@ -120,12 +130,6 @@ class SortFolder:
 
         This function iterates over the defined categories and checks if each category folder
         exists in the BASE_FOLDER. If a category folder doesn't exist, it creates the folder.
-
-        Args:
-            None
-
-        Returns:
-            None
         """
 
         for folder_name in CATEGORIES:
@@ -275,12 +279,6 @@ class SortFolder:
         Files that match the extensions specified in the CATEGORIES dictionary are moved to their
         corresponding category folders using the move_file function.
         Files with unknown extensions are renamed using the rename_file function.
-
-        Args:
-            None
-
-        Returns:
-            None
         """
 
         for root, dirs, files in os.walk(self.BASE_FOLDER):
@@ -297,12 +295,6 @@ class SortFolder:
         This function extracts files from archive files located within the 'archives' folder
         of the BASE_FOLDER. It supports multiple archive formats such as zip, gz, tar, and 7z.
         Extracted files are placed in the 'archives' folder and the original archive files are deleted.
-
-        Args:
-            None
-
-        Returns:
-            None
         """
 
         folder_path = os.path.join(self.BASE_FOLDER, 'archives')
@@ -327,12 +319,6 @@ class SortFolder:
 
         This function traverses the files and folders within the BASE_FOLDER in reverse order.
         Empty folders (excluding category folders) are deleted recursively.
-
-        Args:
-            None
-
-        Returns:
-            None
         """
 
         for root, dirs, files in os.walk(self.BASE_FOLDER, topdown=False):
@@ -353,12 +339,6 @@ class SortFolder:
         This function is the main entry point for the disassembly process.
         It calls various functions to create categories, move files, unpack archives,
         and delete empty folders.
-
-        Args:
-            None
-
-        Returns:
-            None
         """
 
         self.create_categories()
@@ -366,8 +346,4 @@ class SortFolder:
         self.unpack_archives()
         self.delete_empty_folders()
 
-        return stylize("Sorting folder ", 'green') + self.BASE_FOLDER + stylize(" completed.", 'green') + "\n"
-
-# path = input('>>> ')
-# arch = UnpackArchive(path)
-# print(arch.extract())
+        return stylize("Sorting folder ", 'green') + self.BASE_FOLDER + stylize(" completed.", 'green')

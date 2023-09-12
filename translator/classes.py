@@ -7,8 +7,17 @@ from styles import stylize
 
 
 class Translator:
+    """Translates text from one language to another."""
 
-    def __init__(self, query_text, from_language, to_language) -> None:
+    def __init__(self, query_text: str, from_language: str, to_language: str) -> str:
+        """Initialize the Translator
+
+        Args:
+            query_text (str): The text to translate.
+            from_language (str): The source language code.
+            to_language (str): The target language code.
+        """
+
         self.query_text = query_text
         self.from_language = from_language
         self.to_language = to_language
@@ -20,7 +29,14 @@ class Translator:
             'update_session_after_freq': 1,
         }
 
-    def translate(self):
+    def translate(self) -> str:
+        """
+        Translate the text.
+
+        Returns:
+            str: The translated text.
+        """
+
         try:
             return translators.translate_text(**self.params)
         except:
@@ -28,13 +44,20 @@ class Translator:
 
 
 class Talker:
+    """Speaks text aloud."""
 
     @staticmethod
-    def speak_up(phrase):
+    def speak_up(phrase: str) -> None:
+        """Speak the given phrase aloud.
 
-        def animate():
+        Args:
+            phrase (str): The phrase to speak.
+        """
 
-            animation = ["   ", ")", " ))", ")))", " ))", "  )", "   "]
+        def animate() -> None:
+            """Show an animation while text is being spoken."""
+
+            animation = ["   ", ")", "))", ")))", " ))", "  )", "   "]
 
             while not stop_thread.is_set():
                 for symbol in animation:
@@ -44,6 +67,7 @@ class Talker:
 
         engine = pyttsx3.init()
         engine.setProperty("rate", 110)
+        engine.setProperty("voice", "english")
         engine.say(phrase)
 
         stop_thread = threading.Event()
