@@ -3,14 +3,13 @@ import os
 from styles import stylize
 
 
-
-
 def sort_folder_run() -> None:
     """Prompt user for folder path and run sorting on it"""
 
     while True:
 
-        print('Enter the path to the folder in which you want to organize or enter "Back" to return to the previous menu:')
+        print(
+            'Enter the path to the folder in which you want to organize or enter "Back" to return to the previous menu:')
         path = input('>>> ')
 
         if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
@@ -20,17 +19,18 @@ def sort_folder_run() -> None:
             print(stylize('Folder ', 'red') + path + stylize(' does not exist.', 'red'))
             continue
 
-
         sort = SortFolder(path)
         print(sort.run())
         break
+
 
 def normalize_name() -> None:
     """Prompt user for file/folder path and normalize its name"""
 
     while True:
 
-        print('Enter the path of the file or folder for which you want to normalize the name or enter "Back" to return to the previous menu:')
+        print(
+            'Enter the path of the file or folder for which you want to normalize the name or enter "Back" to return to the previous menu:')
         path = input('>>> ')
 
         if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
@@ -63,11 +63,13 @@ def unpack_archive() -> None:
         print(unpac.extract())
         break
 
+
 handler = {
-            '1': sort_folder_run,
-            '2': normalize_name,
-            '3': unpack_archive,
-            }
+    '1': sort_folder_run,
+    '2': normalize_name,
+    '3': unpack_archive,
+}
+
 
 def start() -> None:
     """Display welcome and initial command prompt loop"""

@@ -52,20 +52,21 @@ def start() -> None:
     print(stylize("\nWelcome to the Translator!", 'white', 'bold'))
 
     while True:
-
-        print(stylize('Select a command:', 'white'))
+        print(stylize("Available commands:", '', 'bold'))
         print('1 - Translate from English to Ukrainian')
         print('2 - Translate from Ukrainian to English')
         print('3 - Listen to how a word or phrase sounds in English')
         print('4 - Return to the main menu')
-        command = input('>>> ')
+        command = input("Enter a number: ")
+
         if command in ('4', 'back', "exit", "close", 'quit', 'q', '0'):
             break
-        elif command  == '1':
+        elif command == '1':
             translate('en', 'uk')
-        elif command  == '2':
+        elif command == '2':
             translate('uk', 'en')
-        elif command  == '3':
+        elif command == '3':
             say_text()
         else:
             print(stylize("The command is incorrect", 'red'))
+

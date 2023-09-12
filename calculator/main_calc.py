@@ -1,13 +1,13 @@
 from styles import stylize
 import requests
 
-
 try:
     from calc import Calculator
 except ModuleNotFoundError:
     from .calc import Calculator
 '''
 Start the calculator application.
+# python3 -m calculator.main_calc
 '''
 
 
@@ -19,24 +19,27 @@ def start_calc():
             break
         except:
             print(stylize('The entered is not numbers', 'red'))
-    print(f"The entered first and second numbers are :{input_1}, {input_2}")
+    print(stylize(f"The entered first and second numbers are :{input_1}, {input_2}", "green"))
     my_instance = Calculator()
     choice = 1
     while choice != 0:
         print("The history: ", my_instance.history())
-        print("0. Exit")
-        print("1. Addition (+)")
-        print("2. Subtraction (-)")
-        print("3. Multiplication (*)")
-        print("4. Division (/)")
-        print("5. Change your number ")
-        choice = int(input("Enter your choice... \n>>>"))
+        print("1 - Addition (+)")
+        print("2 - Subtraction (-)")
+        print("3 - Multiplication (*)")
+        print("4 - Division (/)")
+        print("5 - Change your number ")
+        print("0 - Exit")
+        try:
+            choice = int(input("Enter your choice: "))
+        except:
+            print(stylize('is not menu number', 'red'))
         if choice == 1:
             print("The computed addition result is : ", my_instance.sum(input_1, input_2))
         elif choice == 2:
             print("The computed subtraction result is : ", my_instance.sub(input_1, input_2))
         elif choice == 3:
-            print("The computed product result is : ", my_instance.mul(input_1, input_2))
+            print("The computed multiplication result is : ", my_instance.mul(input_1, input_2))
         elif choice == 4:
             print("The computed division result is : ", round(my_instance.div(input_1, input_2), 3))
         elif choice == 5:
@@ -45,35 +48,10 @@ def start_calc():
                 input_2 = float(input("Enter the second number: "))
             except:
                 print('The entered is not numbers')
-        # elif choice==6:
-        #     print("The history: ", my_instance.history())
         elif choice == 0:
             print("Exit")
         else:
-            print("Sorry, invalid choice!")
-
-
-
-def other_vignettes():
-
-    choice = 1
-    while choice != 0:
-        if choice == 1:
-            print('Open calculator')
-        elif choice == 2:
-            print('Open convertor')
-        elif choice == 3:
-            print('fibonaci/factorial')
-        elif choice == 4:
-            try:
-                num = int(input('Enter number\n>>>'))
-                fact_num(str(num))
-            except:
-                print(stylize('try again', 'red'))
-        elif choice == 5:
-            print('Mamkin hacker')
-        elif choice == 0:
-            print('exit')
+            print(stylize("Sorry, invalid choice!", 'red'))
 
 
 def fact_num(num: str):
@@ -82,17 +60,16 @@ def fact_num(num: str):
     response = requests.get(api_url + num)
 
     if response.status_code == 200:
-        print(response.text)
+        print(stylize(response.text, 'green'))
     else:
         print(response.status_code)
 
 
-def convert_units(var: int):
+def convert_units():
     """
     Converts between metric and non-metric units for various measurements.
 
     Args:
-        var (int): 1 for metric to non-metric conversion, 2 for non-metric to metric conversion.
 
     Raises:
         ValueError: If an invalid choice is made.
@@ -100,16 +77,29 @@ def convert_units(var: int):
     Example:
         convert_units(1)  # Convert metric to non-metric
     """
-    # var = int(input('1: Ru - Eng\n2: Eng - Ru\n'))
-    while var!=0:
+    a = True
+    while a:
+        try:
+            var = int(
+                input('1 - for metric to non-metric conversion,\n 2 - for non-metric to metric conversion,\n 0 - exit\n'))
+            a = False
+        except ValueError:
+            print('is not number')
+            continue
+        except UnboundLocalError:
+            print('is not number')
+            continue
+    while var != 0:
         if var == 1:
             print('Converting from metric to non-metric')
-            conversion_type = int(
-                input('What do we convert?\n 1. Temperature\n 2. Weight\n 3. Length\n 4. Volume\n 5. Speed\n '))
+            conversion_type = int(input('What do we convert?\n 1 - Temperature\n 2 - Weight\n 3 - Length\n 4 - Volume\n'
+                                        '5 - Speed\n 0 - Exit to menu\n'))
+            if conversion_type == 0:
+                break
 
             # Temperature conversion
             if conversion_type == 1:
-                temperature = int(input(' 1. Celsius to Fahrenheit\n 2. Celsius to Kelvin\n'))
+                temperature = int(input(' 1 - Celsius to Fahrenheit\n 2 - Celsius to Kelvin\n'))
                 if temperature == 1:
                     value_temperature = float(input('How many degrees Celsius? :\n'))
                     print(value_temperature, 'degrees Celsius is equal to',
@@ -121,7 +111,7 @@ def convert_units(var: int):
 
             # Weight conversion
             elif conversion_type == 2:
-                mass = int(input(' 1. Kilograms to Pounds\n 2. Grams to Ounces\n '))
+                mass = int(input(' 1 - Kilograms to Pounds\n 2 - Grams to Ounces\n '))
                 if mass == 1:
                     value_mass = float(input('How many kilograms? :\n'))
                     print(value_mass, 'kilograms is equal to', round((value_mass * 2.20462), 2), 'pounds')
@@ -131,8 +121,8 @@ def convert_units(var: int):
 
             # Length conversion
             elif conversion_type == 3:
-                length = int(input(' 1. Kilometers to Miles\n 2. Meters to Yards\n 3. Meters to Feet\n '
-                                   '4. Centimeters to Inches\n 5. Millimeters to Inches \n'))
+                length = int(input(' 1 - Kilometers to Miles\n 2 - Meters to Yards\n 3 - Meters to Feet\n '
+                                   '4 - Centimeters to Inches\n 5 - Millimeters to Inches \n'))
                 if length == 1:
                     value_length = float(input('How many kilometers? :\n'))
                     print(value_length, 'kilometers is equal to', round((value_length * 1.60934), 2), 'miles')
@@ -151,7 +141,7 @@ def convert_units(var: int):
 
             # Volume conversion
             elif conversion_type == 4:
-                volume = int(input(' 1. Liters to Gallons\n 2. Liters to Pints\n'))
+                volume = int(input(' 1 - Liters to Gallons\n 2 - Liters to Pints\n'))
                 if volume == 1:
                     value_volume = float(input('How many liters? : '))
                     print(value_volume, 'liters is equal to', round((value_volume / 3.785411784), 2), 'gallons')
@@ -165,11 +155,13 @@ def convert_units(var: int):
         elif var == 2:
             print('Converting from non-metric to metric')
             conversion_type = int(
-                input('What do we convert?\n 1. Temperature\n 2. Weight\n 3. Length\n 4. Volume\n 5. Speed\n '))
+                input('What do we convert?\n 1 - Temperature\n 2 - Weight\n 3 - Length\n 4 - Volume\n 5 - Speed\n 0 - Exit to menu\n'))
+            if conversion_type == 0:
+                break
 
             # Temperature conversion
             if conversion_type == 1:
-                temperature = int(input(' 1. Fahrenheit to Celsius\n 2. Kelvin to Celsius\n'))
+                temperature = int(input(' 1 - Fahrenheit to Celsius\n 2 - Kelvin to Celsius\n'))
                 if temperature == 1:
                     value_temperature = float(input('How many degrees Fahrenheit? :\n'))
                     print(value_temperature, 'degrees Fahrenheit = ', round(((5 / 9) * value_temperature - 32), 2),
@@ -180,7 +172,7 @@ def convert_units(var: int):
 
             # Weight conversion
             if conversion_type == 2:
-                mass = int(input(' 1. Pounds to Kilograms\n 2. Ounces to Grams\n'))
+                mass = int(input(' 1 - Pounds to Kilograms\n 2 - Ounces to Grams\n'))
                 if mass == 1:
                     value_mass = float(input('How many pounds? :\n'))
                     print(value_mass, 'pounds is equal to', round((value_mass * 0.453592), 2), 'kilograms')
@@ -190,8 +182,8 @@ def convert_units(var: int):
 
             # Length conversion
             if conversion_type == 3:
-                length = int(input(' 1. Miles to Kilometers\n 2. Yards to Meters\n 3. Feet to Meters\n '
-                                   '4. Inches to Centimeters\n'))
+                length = int(input(' 1 - Miles to Kilometers\n 2 - Yards to Meters\n 3 - Feet to Meters\n '
+                                   '4 - Inches to Centimeters\n'))
                 if length == 1:
                     value_length = float(input('How many miles? :\n'))
                     print(value_length, 'miles =', round((value_length / 0.621371), 2), 'kilometers')
@@ -207,7 +199,7 @@ def convert_units(var: int):
 
             # Volume conversion
             if conversion_type == 4:
-                volume = int(input(' 1. Gallons to Liters\n 2. Pints to Liters\n'))
+                volume = int(input(' 1 - Gallons to Liters\n 2 - Pints to Liters\n'))
                 if volume == 1:
                     value_volume = float(input('How many gallons? : \n'))
                     print(value_volume, 'gallons =', round((value_volume * 3.785411784), 2), 'liters')
@@ -224,7 +216,8 @@ def convert_units(var: int):
             print('exit')
             break
         else:
-            raise ValueError("Invalid choice. Please select either 1 or 2.")
+            print("Invalid choice. Please select either 1 or 2 or 0.")
+            var = 0
 
 
 def fibonacci(n):
@@ -279,7 +272,50 @@ def factorial(n):
     return result
 
 
+def main():
+    """
+    main func
+    main menu
+
+    Returns:
+
+    """
+    print(stylize("\nWelcome to the calculator!", 'white', 'bold'))
+    choice = None
+    while choice != 0:
+        print(stylize("Available commands:", '', 'bold'))
+        print("1 - Open calculator\n2 - Open convertor\n3 - Fibonaci\n4 - Factorial\n5 - Fact for your number\n0 - Exit")
+        try:
+            choice = int(input("Enter a number: "))
+        except TypeError:
+            print(stylize('Please enter a number', 'red'))
+        if choice == 1:
+            # print('Open calculator')
+            start_calc()
+        elif choice == 2:
+            # print('2 - Open convertor')
+            convert_units()
+        elif choice == 3:
+            try:
+                num = int(input('Enter number\n>>>'))
+                print(stylize(str(fibonacci(num)), 'green'))
+            except TypeError:
+                print(stylize('try again', 'red'))
+        elif choice == 4:
+            try:
+                num = int(input('Enter number\n>>>'))
+                print(stylize(str(factorial(num)), 'green'))
+            except TypeError:
+                print(stylize('try again', 'red'))
+        elif choice == 5:
+            try:
+                num = int(input('Enter number\n>>>'))
+                fact_num(str(num))
+            except TypeError:
+                print(stylize('try again', 'red'))
+        elif choice == 0:
+            print('exit')
+
+
 if __name__ == '__main__':
-    convert_units(int(input('>>')))
-
-
+    main()
