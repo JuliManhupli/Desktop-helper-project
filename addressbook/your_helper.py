@@ -1,9 +1,9 @@
 from tabulate import tabulate
-
 try:
     from classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
 except ModuleNotFoundError:
     from .classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
+
 
 
 def main():
@@ -35,12 +35,12 @@ def main():
                 if normalized_phone:
                     phones.append(normalized_phone)
                 else:
-                    print(
-                        f"{Bcolors.FAIL}Invalid phone number format. Please enter a valid phone number.{Bcolors.ENDC}")
+
+                    print(stylize("Invalid phone number format. Please enter a valid phone number", 'red'))
 
             email = input("Enter the email address: ")
             while email and not Email.validate_email(email):
-                print(f"{Bcolors.FAIL}Invalid email address. Please enter a valid email address.{Bcolors.ENDC}")
+                print(stylize("Invalid email address. Please enter a valid email address", 'red'))
                 email = input("Enter the email address: ")
 
             birthday = input("Enter the birthday (YYYY-MM-DD): ")
@@ -49,7 +49,7 @@ def main():
                     birthday = Birthday(birthday)
                     break
                 except ValueError:
-                    print(f"{Bcolors.FAIL}Invalid birthday date format. Use YYYY-MM-DD.{Bcolors.ENDC}")
+                    print(stylize("Invalid birthday date format. Use YYYY-MM-DD", 'red'))
                     birthday = input("Enter the birthday (YYYY-MM-DD): ")
 
             address = input("Enter the address: ")
@@ -61,14 +61,14 @@ def main():
                         new_email = Email(email)
                         contact.email = new_email
                     else:
-                        print(f"{Bcolors.FAIL}Invalid email address. Please enter a valid email address.{Bcolors.ENDC}")
+                        print(stylize("Invalid email address. Please enter a valid email address", 'red'))
                 if birthday:
                     contact.birthday = Birthday(birthday)
                 if address:
                     contact.address = Address(address)
             else:
                 ab.add_contact(name, phones, email, birthday, address)
-            print(f'Contact was added to our AddressBook!\n')
+            print('Contact was added to our AddressBook!\n')
             ab.save_to_csv()
 
         elif user_input in ['search', '2', 'find']:
@@ -85,7 +85,7 @@ def main():
                 if found_contact.address:
                     print(f"Address: {found_contact.address}")
             else:
-                print("\nContact not found.")
+                print(stylize("\nContact not found.", 'yellow'))
 
         elif user_input in ['list', '3', 'show all']:
             table_data = []
@@ -100,7 +100,6 @@ def main():
                 table_data.append(row)
 
             headers = ['Name', 'Phone', 'Email', 'Birthday', '  Address  ']
-            max_address_length = 20
             colalign = ['center'] * len(headers)
             stralign = ['left'] * len(headers)
             index = None
@@ -125,7 +124,7 @@ def main():
                 if Email.validate_email(email):
                     break
                 else:
-                    print(f"{Bcolors.FAIL}Invalid email address. Please enter a valid email address.{Bcolors.ENDC}")
+                    print(stylize("Invalid email address. Please enter a valid email address", 'red'))
             address = input("Enter the new address (leave empty to keep the same): ")
             ab.edit_contact(name, phone, email, address)
             ab.save_to_csv()
@@ -140,7 +139,7 @@ def main():
                     print(f"Birthday: {contact.birthday.value}")
                     print(f"Days until birthday: {contact.days_until_birthday}\n")
             else:
-                print("\nNo upcoming birthdays found within the specified number of days.")
+                print(stylize("\nNo upcoming birthdays found within the specified number of days.", 'yellow'))
 
         elif user_input in ['delete', '6']:
             name = input("Enter the name of the contact to delete: ")
@@ -149,13 +148,13 @@ def main():
 
         elif user_input in ['exit', '7']:
             ab.save_to_csv()
-            print('All tests passed and data saved!')
-            print('Goodbye! :)')
+            print('\nAll tests passed and data saved!')
+            print('Goodbye! ')
             break
 
         elif user_input not in ['add', 'search', 'list', 'edit', 'delete', 'exit', 'show all', 'find', 'upcoming',
                                 'birthday']:
-            print(f'{Bcolors.FAIL}You did not chose a command. Please, try again :){Bcolors.ENDC}')
+            print(stylize('You did not chose a command. Please, try again!', 'yellow'))
 
 
 if __name__ == '__main__':
