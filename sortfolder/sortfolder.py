@@ -3,13 +3,11 @@ import os
 from styles import stylize
 
 
-
-
 def sort_folder_run():
-
     while True:
 
-        print('Enter the path to the folder in which you want to organize or enter "Back" to return to the previous menu:')
+        print(
+            'Enter the path to the folder in which you want to organize or enter "Back" to return to the previous menu:')
         path = input('>>> ')
 
         if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
@@ -19,16 +17,16 @@ def sort_folder_run():
             print(stylize('Folder ', 'red') + path + stylize(' does not exist.', 'red'))
             continue
 
-
         sort = SortFolder(path)
         print(sort.run())
         break
 
-def normalize_name():
 
+def normalize_name():
     while True:
 
-        print('Enter the path of the file or folder for which you want to normalize the name or enter "Back" to return to the previous menu:')
+        print(
+            'Enter the path of the file or folder for which you want to normalize the name or enter "Back" to return to the previous menu:')
         path = input('>>> ')
 
         if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
@@ -42,8 +40,8 @@ def normalize_name():
         print(normalize.rename(path))
         break
 
-def unpack_archive():
 
+def unpack_archive():
     while True:
 
         print('Enter the path to the archive you want to unpack or enter "Back" to return to the previous menu:')
@@ -60,14 +58,15 @@ def unpack_archive():
         print(unpac.extract())
         break
 
+
 handler = {
-            '1': sort_folder_run,
-            '2': normalize_name,
-            '3': unpack_archive,
-            }
+    '1': sort_folder_run,
+    '2': normalize_name,
+    '3': unpack_archive,
+}
+
 
 def start():
-
     print(stylize("\nWelcome to the Sortfolder!", 'white', 'bold'))
 
     while True:

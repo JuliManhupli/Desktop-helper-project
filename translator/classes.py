@@ -2,6 +2,7 @@ import translators
 import pyttsx3
 import time
 import threading
+import locale
 from styles import stylize
 
 
@@ -16,7 +17,7 @@ class Translator:
             'query_text': self.query_text,
             'from_language': self.from_language,
             'to_language': self.to_language,
-            'update_session_after_freq' : 1,
+            'update_session_after_freq': 1,
         }
 
     def translate(self):

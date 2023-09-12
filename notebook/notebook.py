@@ -23,7 +23,14 @@ search_type = (("Date of creation", "date_of_creation"),
                ("D_Day", "d_day"))
 
 
-def get_input(prompt, error_message=None):
+def get_input(prompt: str, error_message: str = None) -> str:
+    """
+    Get user input with optional error message.
+
+    :param prompt: The input prompt.
+    :param error_message: Optional error message to display on invalid input.
+    :return: User input.
+    """
     while True:
         user_input = input(prompt).strip()
         if not user_input:
@@ -36,6 +43,11 @@ def get_input(prompt, error_message=None):
 
 
 def get_tags_input():
+    """
+    Get tags input from the user.
+
+    :return: List of tags or None if user enters '-'.
+    """
     print(stylize("To leave the field empty, enter '-'", 'yellow'))
     tags_input = get_input("Enter the tags separated by a comma: ")
     if tags_input == "-":
@@ -47,7 +59,13 @@ def get_tags_input():
         return tags
 
 
-def get_date_input(search=False):
+def get_date_input(search: bool = False):
+    """
+    Get date input from the user.
+
+    :param search: If True, the function is used for search, and the field can be left empty.
+    :return: Formatted date string or None if user enters '-'.
+    """
     if not search:
         print(stylize("To leave the field empty, enter '-'", 'yellow'))
     while True:
@@ -62,6 +80,11 @@ def get_date_input(search=False):
 
 
 def add_note() -> str:
+    """
+    Add a new note to the notebook.
+
+    :return: A status message.
+    """
     title = get_input("Enter the title: ")
 
     if title in NOTEBOOK.data:
@@ -85,7 +108,12 @@ def add_note() -> str:
     return stylize(f"Note '{title}' was saved\n", '', 'bold')
 
 
-def search_note():
+def search_note() -> str:
+    """
+    Search for notes based on user input.
+
+    :return: Search results.
+    """
     while True:
         print(stylize("To search notes by:", '', 'bold'))
         [print(f"{i} - {search[0]}") for i, search in enumerate(search_type, 1)]
@@ -93,7 +121,6 @@ def search_note():
         try:
             parameter = search_type[int(user_input) - 1][0]
             attribute = search_type[int(user_input) - 1][1]
-            print(attribute)
             break
         except IndexError:
             print(stylize(f"Please enter a number from 1 to {len(search_type)}", 'red'))
@@ -129,6 +156,11 @@ def search_note():
 
 
 def edit_note() -> str:
+    """
+    Edit an existing note.
+
+    :return: A status message.
+    """
     print(stylize("To exit enter '-'", 'yellow'))
     while True:
         title = get_input("Enter the title of the note you want to edit: ")
@@ -141,43 +173,73 @@ def edit_note() -> str:
         if not found_note:
             print(f"Note '{title}' not found in the notebook.")
         else:
-            edit_title = get_input("Do you want to change the title? (yes/no): ").lower()
-            if edit_title in ["yes", "+", "y"]:
-                new_title = get_input("Enter the new title: ")
+            while True:
+                edit_title = get_input("Do you want to change the title? (yes/no): ").lower()
+                if edit_title in ["yes", "+", "y"]:
+                    new_title = get_input("Enter the new title: ")
 
-                if new_title in NOTEBOOK.data:
-                    print(stylize("Note with the title '{title}' already exists.", 'yellow'))
-                    overwrite_option = get_input("Do you want to overwrite it? (yes/no): ")
-                    if overwrite_option.lower() not in ["yes", "+", "y"]:
-                        count = 1
+                    if new_title in NOTEBOOK.data:
+                        print(stylize("Note with the title '{title}' already exists.", 'yellow'))
+                        overwrite_option = get_input("Do you want to overwrite it? (yes/no): ")
+                        if overwrite_option.lower() not in ["yes", "+", "y"]:
+                            count = 1
 
-                        while new_title in NOTEBOOK.data:
-                            new_title = f"{new_title} ({count})"
-                            count += 1
+                            while new_title in NOTEBOOK.data:
+                                new_title = f"{new_title} ({count})"
+                                count += 1
 
-                del NOTEBOOK.data[title]
-                found_note.title = new_title
-                NOTEBOOK.data[new_title] = found_note
-            edit_text = get_input("Do you want to change the text? (yes/no): ").lower()
-            if edit_text in ["yes", "+", "y"]:
-                new_text = get_input("Enter the new text: ")
-                found_note.text = new_text
+                    del NOTEBOOK.data[title]
+                    found_note.title = new_title
+                    NOTEBOOK.data[new_title] = found_note
+                    break
+                elif edit_title in ["no", "-", "n"]:
+                    break
+                else:
+                    print(stylize("Invalid input.", 'red'))
 
-            edit_tags = get_input("Do you want to change the tags? (yes/no): ").lower()
-            if edit_tags in ["yes", "+", "y"]:
-                new_tags = get_tags_input()
-                found_note.tags = new_tags
+            while True:
+                edit_text = get_input("Do you want to change the text? (yes/no): ").lower()
+                if edit_text in ["yes", "+", "y"]:
+                    new_text = get_input("Enter the new text: ")
+                    found_note.text = new_text
+                    break
+                elif edit_text in ["no", "-", "n"]:
+                    break
+                else:
+                    print(stylize("Invalid input.", 'red'))
 
-            edit_d_day = get_input("Do you want to change the D-Day? (yes/no): ").lower()
-            if edit_d_day in ["yes", "+", "y"]:
-                new_d_day = get_date_input()
-                found_note.d_day = new_d_day
+            while True:
+                edit_tags = get_input("Do you want to change the tags? (yes/no): ").lower()
+                if edit_tags in ["yes", "+", "y"]:
+                    new_tags = get_tags_input()
+                    found_note.tags = new_tags
+                    break
+                elif edit_tags in ["no", "-", "n"]:
+                    break
+                else:
+                    print(stylize("Invalid input.", 'red'))
+
+            while True:
+                edit_d_day = get_input("Do you want to change the D-Day? (yes/no): ").lower()
+                if edit_d_day in ["yes", "+", "y"]:
+                    new_d_day = get_date_input()
+                    found_note.d_day = new_d_day
+                    break
+                elif edit_d_day in ["no", "-", "n"]:
+                    break
+                else:
+                    print(stylize("Invalid input.", 'red'))
 
             NOTEBOOK.save_to_json('notebook/notebook.json')
             return stylize(f"Note '{title}' edited successfully.\n", '', 'bold')
 
 
 def delete_note() -> str:
+    """
+    Delete an existing note.
+
+    :return: A status message.
+    """
     print(stylize("To exit enter '-'", 'yellow'))
     while True:
         title = get_input("Enter the title of the note you want to delete: ")
@@ -194,6 +256,11 @@ def delete_note() -> str:
 
 
 def sort_note() -> str:
+    """
+    Sort notes based on user input.
+
+    :return: A status message.
+    """
     while True:
         print(stylize("To sort notes by:", '', 'bold'))
         [print(f"{i} - {sort}") for i, sort in enumerate(sort_type, 1)]
@@ -209,14 +276,20 @@ def sort_note() -> str:
 
 
 def command_parser(raw_str: str):
+    """
+    Parse user commands and execute corresponding functions.
+
+    :param raw_str: Raw user input string.
+    :return: A status message.
+    """
     elements = raw_str.split()
     if len(elements) < 1:
-        return stylize("Invalid command format.", 'red')
+        return stylize("Invalid command format.\n", 'red')
 
     for key, value in COMMANDS.items():
         if elements[0].lower() in value:
             return key()
-    return "Unknown command"
+    return stylize("Unknown command.\n", 'red')
 
 
 COMMANDS = {
@@ -228,18 +301,23 @@ COMMANDS = {
 }
 
 
-def main():
+def main() -> None:
+    """
+    The main program loop for user interaction.
+
+    :return: None
+    """
     print(stylize("\nWelcome to the notebook!", 'white', 'bold'))
 
     while True:
         print(stylize("Available commands:", '', 'bold'))
-        print("1. add - Add a new note")
-        print("2. search - Search for a note")
-        print("3. list - List all notes")
-        print("4. edit - Edit a note")
-        print("5. delete - Delete a note")
-        print("6. sort - Sort notes")
-        print("7. menu - Exit the program\n")
+        print("1. 'add' or '1'                    ->  Add a new note")
+        print("2. 'search' or 'find' or '2'       ->  Search for a note")
+        print("3. 'list' or 'show all' or '3'     ->  List all notes")
+        print("4. 'edit' or '4'                   ->  Edit a note")
+        print("5. 'delete' or '5'                 ->  Delete a note")
+        print("6. 'sort' or '6'                   ->  Sort notes")
+        print("7. 'exit' or '7'                   ->  Exit the program\n")
         user_input = input("Enter a command: ").strip()
 
         if user_input.lower() == "hello":
@@ -249,7 +327,7 @@ def main():
             NOTEBOOK.show_all()
             print()
 
-        elif user_input.lower() in ["menu", "back", "7"]:
+        elif user_input.lower() in ["exit", "menu", "back", "close", 'quit', 'q', '0', "7"]:
             print(stylize("Goodbye!\n", '', 'bold'))
             break
 
@@ -258,7 +336,12 @@ def main():
             print(result)
 
 
-def start():
+def start() -> None:
+    """
+    Start the notebook application.
+
+    :return: None
+    """
     global NOTEBOOK
 
     try:
@@ -272,3 +355,7 @@ def start():
         main()
     finally:
         NOTEBOOK.save_to_json('notebook/notebook.json')
+
+
+if __name__ == '__main__':
+    start()

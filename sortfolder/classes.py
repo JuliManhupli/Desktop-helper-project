@@ -4,24 +4,27 @@ import shutil
 from string import ascii_letters, digits
 from styles import stylize
 
-
 TRANSLITERATION = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
-                'з': 'z', 'и': 'y', 'і': 'i', 'ї': 'yi', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
-                'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '',
-                'ы': 'y', 'ь': '', 'э': 'e', 'є': 'ye', 'ё': 'yo', 'ю': 'yu', 'я': 'ya', 'Ё': 'Yo','Є': 'Ye', 'Ї': 'Yi', 'А': 'A', 'Б': 'B',
-                'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ж': 'Zh', 'З': 'Z', 'И': 'I', 'І': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L',
-                'М': 'M', 'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Х': 'H',
-                'Ц': 'Ts', 'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Shch', 'Э': 'E', 'Ю': 'Yu', 'Я': 'Ya'
-                }
-
+                   'з': 'z', 'и': 'y', 'і': 'i', 'ї': 'yi', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+                   'п': 'p', 'р': 'r',
+                   'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch',
+                   'ъ': '',
+                   'ы': 'y', 'ь': '', 'э': 'e', 'є': 'ye', 'ё': 'yo', 'ю': 'yu', 'я': 'ya', 'Ё': 'Yo', 'Є': 'Ye',
+                   'Ї': 'Yi', 'А': 'A', 'Б': 'B',
+                   'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ж': 'Zh', 'З': 'Z', 'И': 'I', 'І': 'I', 'Й': 'Y', 'К': 'K',
+                   'Л': 'L',
+                   'М': 'M', 'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Х': 'H',
+                   'Ц': 'Ts', 'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Shch', 'Э': 'E', 'Ю': 'Yu', 'Я': 'Ya'
+                   }
 
 CATEGORIES = {'archives': ('zip', 'gz', 'tar', '7z'),
-                'audio': ('mp3', 'ogg', 'wav', 'amr', 'flac'),
-                'documents': ('doc', 'docx', 'txt', 'pdf', 'xlsx', 'pptx', 'odt'),
-                'images': ('jpeg', 'png', 'jpg', 'svg', 'webp'),
-                'video': ('avi', 'mp4', 'mov', 'mkv'),
-                'other': ()
-                }
+              'audio': ('mp3', 'ogg', 'wav', 'amr', 'flac'),
+              'documents': ('doc', 'docx', 'txt', 'pdf', 'xlsx', 'pptx', 'odt'),
+              'images': ('jpeg', 'png', 'jpg', 'svg', 'webp'),
+              'video': ('avi', 'mp4', 'mov', 'mkv'),
+              'other': ()
+              }
+
 
 class NormalizeName:
 
@@ -31,8 +34,8 @@ class NormalizeName:
         correct_characters = ascii_letters + digits + '_'
         file_name, extension = os.path.splitext(file_name)
         file_name = ''.join([char if char in correct_characters else TRANSLITERATION[char]
-                            if char in TRANSLITERATION else '_'
-                            for char in file_name])
+        if char in TRANSLITERATION else '_'
+                             for char in file_name])
 
         while '__' in file_name:
             file_name = file_name.replace('__', '_')
@@ -66,7 +69,7 @@ class NormalizeName:
         new_file_name = cls.get_normal_name(file_name)
 
         if new_file_name == file_name:
-            return  stylize('The name ', 'yellow') + file_name + stylize(' does not need correction.', 'yellow')
+            return stylize('The name ', 'yellow') + file_name + stylize(' does not need correction.', 'yellow')
 
         new_file_name = cls.check_name_conflict(file_path, new_file_name)
 
@@ -108,10 +111,8 @@ class UnpackArchive:
 
 class SortFolder:
 
-    def __init__(self, path) -> None: # path = os.getcwd()
+    def __init__(self, path) -> None:  # path = os.getcwd()
         self.BASE_FOLDER = path
-
-
 
     def create_categories(self) -> None:
         """
@@ -132,8 +133,6 @@ class SortFolder:
             if not os.path.exists(folder_path):
                 os.makedirs(folder_path)
 
-
-
     @staticmethod
     def normalize(file_name: str) -> str:
         """
@@ -153,11 +152,10 @@ class SortFolder:
         correct_characters = ascii_letters + digits + '_'
         file_name, extension = os.path.splitext(file_name)
         file_name = ''.join([char if char in correct_characters else TRANSLITERATION[char]
-                            if char in TRANSLITERATION else '_'
-                            for char in file_name])
+        if char in TRANSLITERATION else '_'
+                             for char in file_name])
 
         return file_name + extension
-
 
     @staticmethod
     def check_name_conflict(folder_path: str, name: str) -> str:
@@ -222,7 +220,6 @@ class SortFolder:
 
         return new_full_file_path
 
-
     @classmethod
     def move_file(cls, file_path: str, destination_folder: str) -> None:
         """
@@ -242,7 +239,6 @@ class SortFolder:
 
         new_full_file_path = cls.rename_file(destination_folder, file_path)
         shutil.move(new_full_file_path, destination_folder)
-
 
     def get_category_path(self, file_name: str) -> str:
         """
@@ -271,7 +267,6 @@ class SortFolder:
 
         return os.path.join(self.BASE_FOLDER, 'other')
 
-
     def move_files(self) -> None:
         """
         Move files to their respective category folders.
@@ -294,8 +289,6 @@ class SortFolder:
             for file in files:
                 category_path = self.get_category_path(file)
                 self.move_file(os.path.join(root, file), category_path)
-
-
 
     def unpack_archives(self) -> None:
         """
@@ -328,7 +321,6 @@ class SortFolder:
 
                 os.remove(file_path)
 
-
     def delete_empty_folders(self) -> None:
         """
         Delete empty folders within the BASE_FOLDER.
@@ -349,11 +341,10 @@ class SortFolder:
                 path = os.path.join(root, directory)
 
                 if os.path.basename(path) in CATEGORIES:
-                            continue
+                    continue
 
                 if not os.listdir(path):
                     os.rmdir(path)
-
 
     def run(self) -> None:
         """
@@ -375,12 +366,7 @@ class SortFolder:
         self.unpack_archives()
         self.delete_empty_folders()
 
-        return stylize("Sorting folder ", 'green') + self.BASE_FOLDER + stylize(" completed.", 'green')
-
-
-
-
-
+        return stylize("Sorting folder ", 'green') + self.BASE_FOLDER + stylize(" completed.", 'green') + "\n"
 
 # path = input('>>> ')
 # arch = UnpackArchive(path)

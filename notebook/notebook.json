@@ -1,11 +1,49 @@
 {
-    "Title": {
-        "date_of_creation": "2023-09-10",
-        "title": "Title",
-        "text": "5",
+    "Presentation of the project": {
+        "date_of_creation": "2023-09-12",
+        "title": "Presentation of the project",
+        "text": "Presentation of the team project at 7 p.m..",
         "tags": [
-            "5"
+            "Course",
+            "Important",
+            "Programming",
+            "Python"
         ],
+        "d_day": "2023-09-14"
+    },
+    "Team meeting": {
+        "date_of_creation": "2023-09-12",
+        "title": "Team meeting",
+        "text": "Team meeting at 7:30 p.m. Discuss urgent issues, check the operation of the application.",
+        "tags": [
+            "Course",
+            "Important",
+            "Meet"
+        ],
+        "d_day": "2023-09-12"
+    },
+    "Kotlin": {
+        "date_of_creation": "2023-09-12",
+        "title": "Kotlin",
+        "text": "Kotlin is a cross-platform, statically typed, general-purpose high-level programming language with type inference.",
+        "tags": [
+            "Kotlin",
+            "Programming"
+        ],
+        "d_day": null
+    },
+    "Infographics": {
+        "date_of_creation": "2023-09-12",
+        "title": "Infographics",
+        "text": "Find information about popular books in Ukraine.",
+        "tags": [],
+        "d_day": "2023-09-16"
+    },
+    "Reminder about the book": {
+        "date_of_creation": "2023-09-12",
+        "title": "Reminder about the book",
+        "text": "Return the book.",
+        "tags": [],
         "d_day": null
     }
 }
