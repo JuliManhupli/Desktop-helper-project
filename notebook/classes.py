@@ -1,19 +1,65 @@
 import json
-from collections import UserDict
+from collections import UserDict, Counter
+from tabulate import tabulate
 
 
 class Notebook(UserDict):
-    N = 2
+    N = 10
+
     def add_note(self, note):
         self.data[note.title] = note
+        self.save_to_json('notebook/notebook.json')
+
+    def delete_note(self, note):
+        if note.title in self.data:
+            del self.data[note.title]
+            self.save_to_json('notebook/notebook.json')
+
+    def show_all(self):
+        itr = iter(self)
+        if itr:
+            for chunk in itr:
+                print(chunk)
+        else:
+            print("The notebook is empty")
+
+    def sort_notes(self, key):
+        if key == 'Date of creation in ascending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.date_of_creation)
+        elif key == 'Date of creation in descending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.date_of_creation, reverse=True)
+        elif key == 'Title in order from A to Z':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.title)
+        elif key == 'Title in order from Z to A':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.title, reverse=True)
+
+        elif key == 'Tags in ascending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.tags)
+        elif key == 'Tags in descending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.tags, reverse=True)
+        elif key == 'Tags sorted by word frequency in the list':
+            tag_counts = Counter(tag for note in self.data.values() for tag in note.tags)
+            sorted_notes = sorted(self.data.values(), key=lambda note: sum(tag_counts[tag] for tag in note.tags),
+                                  reverse=True)
+        elif key == 'D-Day in ascending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.d_day or '')
+        elif key == 'D-Day in descending order':
+            sorted_notes = sorted(self.data.values(), key=lambda note: note.d_day or '', reverse=True)
+        else:
+            return "Invalid sorting key."
+
+        self.data = {note.title: note for note in sorted_notes}
+        self.show_all()
 
     def save_to_json(self, filename):
         data = {}
         for key, note in self.data.items():
             data[key] = {
+                'date_of_creation': note.date_of_creation,
                 'title': note.title,
                 'text': note.text,
-                'tags': note.tags
+                'tags': note.tags,
+                'd_day': note.d_day
             }
 
         try:
@@ -30,60 +76,55 @@ class Notebook(UserDict):
             notebook = cls()
 
             for note_data in data.values():
+                date_of_creation = note_data.get('date_of_creation', '')
                 title = note_data.get('title', '')
                 text = note_data.get('text', '')
                 tags = note_data.get('tags', [])
-                note = Note(title, text, tags)
+                d_day = note_data.get('d_day', None)
+
+                note = Note(date_of_creation, title, text, tags, d_day)
                 notebook.add_note(note)
             return notebook
         except FileNotFoundError:
             print(f"File '{filename}' not found.")
             return cls()
 
-    def show_all(self):
-        itr = iter(self)
-        if itr:
-            for chunk in itr:
-                print(chunk)
-        else:
-            print("The notebook is empty")
-
     def __iter__(self):
         self.current_index = 0
+        self.values = list(self.data.values())
         return self
 
     def __next__(self):
-        values = list(self.data.values())
-        start = self.current_index
-        end = self.current_index + self.N
-        current_chunk = values[start:end]
-        self.current_index += self.N
+        if self.current_index < len(self.values):
+            table_data = []
+            for note in self.values[self.current_index:self.current_index + self.N]:
+                row = [
+                    note.date_of_creation,
+                    note.title,
+                    note.text,
+                    ', '.join(tag for tag in note.tags) if note.tags else "N/A",
+                    note.d_day if note.d_day else "N/A",
+                ]
+                table_data.append(row)
 
-        if len(current_chunk) > 0:
-            representation_record = '-' * 84 + '\n'
-            representation_record += '|{:^20}|{:^40}|{:^20}|\n'.format("Title", "Text", "Tags")
-            representation_record += '-' * 84 + '\n'
+            headers = ['Date', 'Title', 'Text', 'Tags', 'D-Day']
+            table = tabulate(table_data, headers, tablefmt='grid')
 
-            for note in current_chunk:
-                tag_str = str(note.tags[0]) if note.tags else "N/A"
-                representation_record += '|{:^20}|{:^40}|{:^20}|\n'.format(note.title, note.text, tag_str)
-
-                for tag in note.tags[1:]:
-                    representation_record += '|{:^20}|{:^40}|{:^20}|\n'.format("", "", tag)
-
-                representation_record += '-' * 84 + '\n'
-
-            return representation_record
+            self.current_index += self.N
+            return table
         else:
             raise StopIteration
 
+
 class Note:
-    def __init__(self, title, text, tags=None):
+    def __init__(self, date_of_creation, title, text, tags=None, d_day=None):
         if tags is None:
             tags = []
+        self.date_of_creation = date_of_creation
         self.title = title
         self.text = text
         self.tags = tags
+        self.d_day = d_day
 
     def __str__(self):
         return f"Title: {self.title}\nText: {self.text}\nTags: {', '.join(self.tags)}"

@@ -1,9 +1,13 @@
 from tabulate import tabulate
-from classes import AddressBook, Phone, Birthday, Email, Address
-from styles import stylize
+try:
+    from classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
+except ModuleNotFoundError:
+    from .classes import AddressBook, Phone, Birthday, Email, Address, Bcolors
+
 
 
 def main():
+    ab = AddressBook('addressbook/address_book_data.csv')
     while True:
         print("\nAvailable commands:")
         print("1. 'add' or '1'                    ->  Add a new contact")
@@ -31,6 +35,7 @@ def main():
                 if normalized_phone:
                     phones.append(normalized_phone)
                 else:
+
                     print(stylize("Invalid phone number format. Please enter a valid phone number", 'red'))
 
             email = input("Enter the email address: ")
