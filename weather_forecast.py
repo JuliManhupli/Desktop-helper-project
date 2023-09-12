@@ -163,30 +163,36 @@ def list_cities():
 
 def main():
     while True:
-        print("\nEnter the name of a city in Ukraine or enter 'check city' to see the list of cities:")
-        user_input = input().strip().lower()
+        while True:
+            print("\nEnter the name of a city in Ukraine or enter 'check city' to see the list of cities:")
+            user_input = input().strip().lower()
 
-        if user_input == "check city":
-            list_cities()
-            continue
+            if user_input == "check city":
+                list_cities()
+                continue
 
-        selected_city = None
-        for city in cities:
-            if user_input == city["name"].strip().lower():
-                selected_city = city
+            selected_city = None
+            for city in cities:
+                if user_input == city["name"].strip().lower():
+                    selected_city = city
+                    break
+
+            if selected_city:
+                get_weather(selected_city)
                 break
+            else:
+                print(stylize("City not found. Please enter a valid city name or 'check city' to see the list of cities.", 'red'))
 
-        if selected_city:
-            get_weather(selected_city)
-        else:
-            print(stylize("City not found. Please enter a valid city name or 'check city' to see the list of cities.", 'red'))
+        while True:
+            choice = input(stylize("\nDo you want to check the weather for another city? (Yes/No): ", 'yellow'))
+            if choice.strip().lower() in ("no", 'n', '-'):
+                print("\nThank you for using the application. Have a great day!\n")
+                return
+            elif choice.strip().lower() in ('yes', 'y', '+'):
+                break
+            else:
+                print(stylize('\nInvalid command. Please enter "yes" or "no" to continue using the application.', 'red'))
 
-        choice = input(stylize("\nDo you want to check the weather for another city? (Yes/No): ", 'yellow'))
-        if choice.strip().lower() == "no":
-            print("\nThank you for using the application. Have a great day!\n")
-            break
-        elif choice.strip().lower() not in ('yes', 'no'):
-            print(stylize('\nInvalid command. Please enter "yes" or "no" to continue using the application.', 'red'))
 
 
 if __name__ == '__main__':
