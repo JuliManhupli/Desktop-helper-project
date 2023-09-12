@@ -23,7 +23,7 @@ def start_calc():
     my_instance = Calculator()
     choice = 1
     while choice != 0:
-        print("The history: ", my_instance.history())
+        print("The history: ", stylize(str(my_instance.history()), 'yellow', 'bold'))
         print("1 - Addition (+)")
         print("2 - Subtraction (-)")
         print("3 - Multiplication (*)")
@@ -41,7 +41,10 @@ def start_calc():
         elif choice == 3:
             print("The computed multiplication result is : ", my_instance.mul(input_1, input_2))
         elif choice == 4:
-            print("The computed division result is : ", round(my_instance.div(input_1, input_2), 3))
+            try:
+                print("The computed division result is : ", round(my_instance.div(input_1, input_2), 3))
+            except:
+                print(stylize('Operation is not corrected(ZeroDivisionError)', 'red'))
         elif choice == 5:
             try:
                 input_1 = float(input("Enter the first number: "))
@@ -81,7 +84,7 @@ def convert_units():
     while a:
         try:
             var = int(
-                input('1 - for metric to non-metric conversion,\n 2 - for non-metric to metric conversion,\n 0 - exit\n'))
+                input('1 - for metric to non-metric conversion,\n2 - for non-metric to metric conversion,\n0 - exit\n'))
             a = False
         except ValueError:
             print('is not number')
@@ -92,8 +95,8 @@ def convert_units():
     while var != 0:
         if var == 1:
             print('Converting from metric to non-metric')
-            conversion_type = int(input('What do we convert?\n 1 - Temperature\n 2 - Weight\n 3 - Length\n 4 - Volume\n'
-                                        '5 - Speed\n 0 - Exit to menu\n'))
+            conversion_type = int(input('What do we convert?\n1 - Temperature\n2 - Weight\n3 - Length\n4 - Volume\n'
+                                        '5 - Speed\n0 - Exit to menu\n'))
             if conversion_type == 0:
                 break
 
@@ -155,7 +158,7 @@ def convert_units():
         elif var == 2:
             print('Converting from non-metric to metric')
             conversion_type = int(
-                input('What do we convert?\n 1 - Temperature\n 2 - Weight\n 3 - Length\n 4 - Volume\n 5 - Speed\n 0 - Exit to menu\n'))
+                input('What do we convert?\n1 - Temperature\n2 - Weight\n3 - Length\n4 - Volume\n5 - Speed\n0 - Exit to menu\n'))
             if conversion_type == 0:
                 break
 
@@ -287,7 +290,7 @@ def main():
         print("1 - Open calculator\n2 - Open convertor\n3 - Fibonaci\n4 - Factorial\n5 - Fact for your number\n0 - Exit")
         try:
             choice = int(input("Enter a number: "))
-        except TypeError:
+        except:
             print(stylize('Please enter a number', 'red'))
         if choice == 1:
             # print('Open calculator')
@@ -299,19 +302,19 @@ def main():
             try:
                 num = int(input('Enter number\n>>>'))
                 print(stylize(str(fibonacci(num)), 'green'))
-            except TypeError:
+            except:
                 print(stylize('try again', 'red'))
         elif choice == 4:
             try:
                 num = int(input('Enter number\n>>>'))
                 print(stylize(str(factorial(num)), 'green'))
-            except TypeError:
+            except:
                 print(stylize('try again', 'red'))
         elif choice == 5:
             try:
                 num = int(input('Enter number\n>>>'))
                 fact_num(str(num))
-            except TypeError:
+            except:
                 print(stylize('try again', 'red'))
         elif choice == 0:
             print('exit')
