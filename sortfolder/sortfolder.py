@@ -10,7 +10,7 @@ def sort_folder_run() -> None:
 
         print(
             'Enter the path to the folder in which you want to organize or enter "Back" to return to the previous menu:')
-        path = input('>>> ')
+        path = input('>>> ').strip("\"\'")
 
         if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
             break
@@ -31,7 +31,7 @@ def normalize_name() -> None:
 
         print(
             'Enter the path of the file or folder for which you want to normalize the name or enter "Back" to return to the previous menu:')
-        path = input('>>> ')
+        path = input('>>> ').strip("\"\'")
 
         if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
             break
@@ -50,7 +50,7 @@ def unpack_archive() -> None:
     while True:
 
         print('Enter the path to the archive you want to unpack or enter "Back" to return to the previous menu:')
-        path = input('>>> ')
+        path = input('>>> ').strip("\"\'")
 
         if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
             break
