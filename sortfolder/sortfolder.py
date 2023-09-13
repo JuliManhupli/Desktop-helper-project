@@ -81,9 +81,9 @@ def start() -> None:
         print('1 - Sort folder')
         print('2 - File or folder name normalization')
         print('3 - Unpack an archive')
-        print('4 - Return to the main menu')
+        print('0 - Return to the main menu')
         command = input("Enter a command: ").strip()
-        if command == '4':
+        if command == '0':
             print()
             break
         elif command in handler:
