@@ -58,10 +58,10 @@ def start() -> None:
         print('1 - Translate from English to Ukrainian')
         print('2 - Translate from Ukrainian to English')
         print('3 - Listen to how a word or phrase sounds in English')
-        print('4 - Return to the main menu')
+        print('0 - Return to the main menu')
         command = input("Enter a number: ")
 
-        if command in ('4', 'back', "exit", "close", 'quit', 'q', '0'):
+        if command in ('back', "exit", "close", 'quit', 'q', '0'):
             print()
             break
         elif command == '1':

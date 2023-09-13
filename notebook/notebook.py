@@ -317,7 +317,7 @@ def main() -> None:
         print("4. 'edit' or '4'                   ->  Edit a note")
         print("5. 'delete' or '5'                 ->  Delete a note")
         print("6. 'sort' or '6'                   ->  Sort notes")
-        print("7. 'exit' or '7'                   ->  Exit the program\n")
+        print("0. 'exit' or '0'                   ->  Exit the program\n")
         user_input = input("Enter a command: ").strip()
 
         if user_input.lower() == "hello":
@@ -327,7 +327,7 @@ def main() -> None:
             NOTEBOOK.show_all()
             print()
 
-        elif user_input.lower() in ["exit", "menu", "back", "close", 'quit', 'q', '0', "7"]:
+        elif user_input.lower() in ["exit", "menu", "back", "close", 'quit', 'q', '0']:
             print(stylize("Goodbye!\n", '', 'bold'))
             break
 

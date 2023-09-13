@@ -18,7 +18,7 @@ def main():
         print("4. 'edit' or '4'                   ->  Edit a contact")
         print("5. 'upcoming' or 'birthday' or '5' ->  Find upcoming birthdays")
         print("6. 'delete' or '6'                 ->  Delete a contact")
-        print("7. 'exit' or '7'                   ->  Exit the program\n")
+        print("0. 'exit' or '0'                   ->  Exit the program\n")
 
         user_input = input("Enter a command: ").strip().lower()
         if user_input in ['add', '1']:
@@ -76,6 +76,7 @@ def main():
         elif user_input in ['search', '2', 'find']:
             name_to_search = input("Enter the name or phone number to search: ")
             found_contact = ab.search(name_to_search)
+            print(found_contact)
             if found_contact:
                 print(f"\nContact found:")
                 print(f"Name: {found_contact.name.value}")
@@ -158,7 +159,7 @@ def main():
             ab.delete_contact(name)
             ab.save_to_csv()
 
-        elif user_input in ['exit', '7']:
+        elif user_input in ['exit', '0']:
             ab.save_to_csv()
             print('\nAll tests passed and data saved!')
             print('Goodbye! ')
@@ -166,7 +167,7 @@ def main():
 
         elif user_input not in ['add', 'search', 'list', 'edit', 'delete', 'exit', 'show all', 'find', 'upcoming',
                                 'birthday']:
-            print(stylize('You did not chose a command. Please, try again!', 'yellow'))
+            print(stylize('You did not chose a command. Please, try again!', 'red'))
 
 
 if __name__ == '__main__':

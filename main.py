@@ -12,11 +12,10 @@ applications = (("Address book", addressbook_start),
                 ("Notebook", notebook_start),
                 ("Sort folder", sortfolder_start),
                 ("Calculator", calculator_start),
-                ("Exchange rate", exchange_rate_start),
                 ("Translator", translator_start),
                 ("Weather forecast", weather_forecast_start),
+                ("Exchange rate", exchange_rate_start),
                 ("Calories calculator", calories_calculator_start),
-                ("Exit", ""),
                 )
 
 
@@ -25,15 +24,16 @@ def main():
         print(stylize("Welcome to YourHelper!", 'purple', 'bold'))
         print(stylize("List of available applications:", '', 'bold'))
         [print(f"{i} - {app[0]}") for i, app in enumerate(applications, 1)]
+        print("0 - Exit")
         user_input = input("Enter a number to open the application: ")
 
         try:
-            if applications[int(user_input) - 1][0] == "Exit":
+            if user_input == "0":
                 print(stylize("Goodbye!\n", '', 'bold'))
                 break
             applications[int(user_input) - 1][1]()
         except IndexError:
-            print(stylize(f"Please enter a number from 1 to {len(applications)}\n", 'red'))
+            print(stylize(f"Please enter a number from 0 to {len(applications)}\n", 'red'))
         except ValueError:
             print(stylize(f"Please enter a number\n", 'red'))
 

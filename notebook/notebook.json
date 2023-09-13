@@ -1,4 +1,11 @@
 {
+    "Reminder about the book": {
+        "date_of_creation": "2023-09-12",
+        "title": "Reminder about the book",
+        "text": "Return the book.",
+        "tags": [],
+        "d_day": null
+    },
     "Kotlin": {
         "date_of_creation": "2023-09-12",
         "title": "Kotlin",
@@ -7,13 +14,6 @@
             "Kotlin",
             "Programming"
         ],
-        "d_day": null
-    },
-    "Reminder about the book": {
-        "date_of_creation": "2023-09-12",
-        "title": "Reminder about the book",
-        "text": "Return the book.",
-        "tags": [],
         "d_day": null
     },
     "Team meeting": {

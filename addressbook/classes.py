@@ -388,6 +388,7 @@ class AddressBook(UserDict):
             Returns:
             Record: The contact record that matches the query or None if no match is found.
         """
+
         for record in self.data.values():
             if query.lower() in record.name.value.lower():
                 return record
