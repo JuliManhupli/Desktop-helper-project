@@ -8,6 +8,7 @@ from playsound import playsound
 import os
 import subprocess
 import platform
+from translate import Translator
 if platform.system() == 'Linux':
     from pydub import AudioSegment
     from pydub.playback import play
@@ -25,7 +26,7 @@ if you have problems installing playsound, you need to update wheel:
 """
 
 
-class Translator:
+class Translator_en_uk:
     """Translates text from one language to another."""
 
     def __init__(self, query_text: str, from_language: str, to_language: str) -> None:
@@ -59,7 +60,11 @@ class Translator:
         try:
             return translators.translate_text(**self.params)
         except:
-            return stylize("I can't translate it.", 'red')
+            try:
+                translator = Translator(from_lang = self.from_language, to_lang=self.to_language)
+                return translator.translate(self.query_text)
+            except:
+                return stylize("I can't translate it.", 'red')
 
 
 class Talker:
