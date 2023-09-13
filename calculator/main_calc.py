@@ -12,6 +12,11 @@ Start the calculator application.
 
 
 def start_calc():
+    """
+        Start the calculator app loop.
+        Prompts user for two numbers, then enters a loop
+        offering arithmetic operations on those numbers.
+    """
     while True:
         try:
             input_1 = float(input("Enter the first number: "))
@@ -63,6 +68,11 @@ def start_calc():
 
 
 def fact_num(num: str):
+    """
+    Fetch a fact about the given number from the Numbers API.
+    Args:
+        num (str): The number to get a fact for.
+    """
     api_url = 'http://numbersapi.com/'
 
     response = requests.get(api_url + num)
@@ -75,8 +85,7 @@ def fact_num(num: str):
 
 def temperature_conversion_m():
     """
-
-    :return:
+    Convert metric temperature units to non-metric.
     """
     while True:
         try:
@@ -102,8 +111,7 @@ def temperature_conversion_m():
 
 def weight_conversion_m():
     """
-
-    :return:
+    Convert metric weight units to non-metric.
     """
     while True:
         try:
@@ -131,8 +139,7 @@ def weight_conversion_m():
 
 def length_conversion_m():
     """
-
-    :return:
+    Convert metric length units to non-metric.
     """
     while True:
         try:
@@ -175,8 +182,7 @@ def length_conversion_m():
 
 def volume_conversion_m():
     """
-
-    :return:
+    Convert metric volume units to non-metric.
     """
     while True:
         try:
@@ -202,8 +208,7 @@ def volume_conversion_m():
 
 def speed_conversion_m():
     """
-
-    :return:
+    Convert metric speed units to non-metric.
     """
     while True:
         try:
@@ -218,8 +223,7 @@ def speed_conversion_m():
 
 def metric_to_non_metric_conversion():
     """
-
-    :return:
+    Menu loop to convert various metric units to non-metric.
     """
     while True:
         try:
@@ -250,9 +254,8 @@ def metric_to_non_metric_conversion():
 
 def temperature_conversion_nm():
     """
-
-    :return:
-    """
+      Convert non-metric temperature units to metric.
+      """
     while True:
         try:
             print("Temperature Conversion:")
@@ -277,8 +280,7 @@ def temperature_conversion_nm():
 
 def weight_conversion_nm():
     """
-
-    :return:
+    Convert non-metric weight units to metric.
     """
     while True:
         try:
@@ -306,8 +308,7 @@ def weight_conversion_nm():
 
 def length_conversion_nm():
     """
-
-    :return:
+    Convert non-metric length units to metric.
     """
     while True:
         try:
@@ -346,8 +347,7 @@ def length_conversion_nm():
 
 def volume_conversion_nm():
     """
-
-    :return:
+      Convert non-metric volume units to metric.
     """
     while True:
         try:
@@ -373,8 +373,7 @@ def volume_conversion_nm():
 
 def speed_conversion_nm():
     """
-
-    :return:
+    Convert non-metric speed units to metric.
     """
     while True:
         try:
@@ -389,8 +388,7 @@ def speed_conversion_nm():
 
 def non_metric_to_metric_conversion():
     """
-
-    :return:
+    Menu loop to convert various non-metric units to metric.
     """
     while True:
         try:
@@ -421,7 +419,7 @@ def non_metric_to_metric_conversion():
 
 def get_menu_choice():
     """
-    Get the user's choice for metric to non-metric or non-metric to metric conversion.
+    Get user's choice of conversion direction.
     """
     while True:
         try:
@@ -439,7 +437,7 @@ def get_menu_choice():
 
 def convert_units():
     """
-    Main menu to choose between metric to non-metric or non-metric to metric conversion.
+    Main loop to direct between metric/non-metric conversion menus.
     """
     while True:
         choice = get_menu_choice()
@@ -506,14 +504,10 @@ def factorial(n):
 
 def main():
     """
-    main func
-    main menu
-
-    Returns:
-
+    Main function that runs the calculator app loop
+    and menu options.
     """
     print(stylize("\nWelcome to the calculator!", 'white', 'bold'))
-
     while True:
 
         while True:
