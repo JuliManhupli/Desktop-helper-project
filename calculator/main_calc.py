@@ -239,103 +239,257 @@ def convert_units():
                     print(stylize(string_tem, 'green'))
 
                 elif length == 3:
-                    value_length = float(input('How many meters: '))
+                    while True:
+                        try:
+                            value_length = float(input('How many meters: '))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
 
                     string_tem = str(value_length) + ' meters is equal to ' + \
                                  str(round((value_length / 0.3048), 2)) + ' feet\n'
                     print(stylize(string_tem, 'green'))
                 elif length == 4:
-                    value_length = float(input('How many centimeters: '))
+                    while True:
+                        try:
+                            value_length = float(input('How many centimeters: '))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
 
                     string_tem = str(value_length) + ' centimeters is equal to ' + \
                                  str(round((value_length * 2.5400013716), 2)) + ' inches\n'
                     print(stylize(string_tem, 'green'))
                 elif length == 5:
-                    value_length = float(input('How many millimeters: '))
+                    while True:
+                        try:
+                            value_length = float(input('How many millimeters: '))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     string_tem = str(value_length) + ' millimeters is equal to ' + \
                                  str(round((value_length / 0.0393701), 2)) + ' inches\n'
                     print(stylize(string_tem, 'green'))
 
             # Volume conversion
             elif conversion_type == 4:
-                volume = int(input('1 - Liters to Gallons\n2 - Liters to Pints\n>>>'))
+                while True:
+                    try:
+                        volume = int(input('1 - Liters to Gallons\n2 - Liters to Pints\n>>>'))
+                        if volume > 2:
+                            print(stylize('Please enter a number from 1 to 2.\n', 'red'))
+                            continue
+                        break
+                    except:
+                        print(stylize('Please enter a number.\n', 'red'))
+
                 if volume == 1:
-                    value_volume = float(input('How many liters: '))
+                    while True:
+                        try:
+                            value_volume = float(input('How many liters: '))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     string_tem = str(value_volume) + ' liters is equal to ' + \
                                  str(round((value_volume / 3.785411784), 2)) + ' gallons\n'
                     print(stylize(string_tem, 'green'))
 
                 elif volume == 2:
-                    value_volume = float(input('How many liters: '))
+                    while True:
+                        try:
+                            value_volume = float(input('How many liters: '))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     string_tem = str(value_volume) + ' liters is equal to ' + \
                                  str(round((value_volume / 0.56826125), 2)) + ' pints\n'
                     print(stylize(string_tem, 'green'))
             elif conversion_type == 5:
-                speed = float(input('How many kilometers per hour: '))
+                while True:
+                    try:
+                        speed = float(input('How many kilometers per hour: '))
+                        break
+                    except:
+                        print(stylize('Please enter a number.\n', 'red'))
+
                 string_tem = str(speed) + ' kilometers per hour is equal to ' + \
                              str(round((speed / 1.60934), 2)) + ' miles per hour\n'
                 print(stylize(string_tem, 'green'))
 
 
         elif var == 2:
-            print(stylize("Converting from non-metric to metric", '', 'bold'))
-            conversion_type = int(
-                input(
-                    'What do we convert?\n1 - Temperature\n2 - Weight\n3 - Length\n4 - Volume\n5 - Speed\n6 - Exit to menu\n>>> '))
+            while True:
+                try:
+                    print(stylize("Converting from non-metric to metric", '', 'bold'))
+                    conversion_type = int(
+                        input('What do we convert?\n1 - Temperature\n2 - Weight\n3 - Length\n4 - Volume\n'
+                              '5 - Speed\n6 - Exit to menu\n>>> '))
+                    if conversion_type > 6:
+                        print(stylize('Please enter a number from 1 to 6.\n', 'red'))
+                        continue
+                    print()
+                    break
+                except:
+                    print(stylize('Please enter a number.\n', 'red'))
+
             if conversion_type == 6:
                 break
 
             # Temperature conversion
             if conversion_type == 1:
-                temperature = int(input('1 - Fahrenheit to Celsius\n2 - Kelvin to Celsius\n>>>'))
+                while True:
+                    try:
+                        temperature = int(input('1 - Fahrenheit to Celsius\n2 - Kelvin to Celsius\n>>>'))
+                        if temperature > 2:
+                            print(stylize('Please enter a number 1 or 2.\n', 'red'))
+                            continue
+                        break
+                    except:
+                        print(stylize('Please enter a number.\n', 'red'))
+
                 if temperature == 1:
-                    value_temperature = float(input('How many degrees Fahrenheit? :\n'))
+                    while True:
+                        try:
+                            value_temperature = float(input('How many degrees Fahrenheit? :\n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_temperature, 'degrees Fahrenheit = ', round(((5 / 9) * value_temperature - 32), 2),
                           ' degrees Celsius')
                 elif temperature == 2:
-                    value_temperature = float(input('How many Kelvin degrees? :\n'))
+                    while True:
+                        try:
+                            value_temperature = float(input('How many Kelvin degrees? :\n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_temperature, 'Kelvin degrees = ', value_temperature - 273.15, ' degrees Celsius')
 
             # Weight conversion
             if conversion_type == 2:
-                mass = int(input(' 1 - Pounds to Kilograms\n 2 - Ounces to Grams\n'))
+                while True:
+                    try:
+                        mass = int(input(' 1 - Pounds to Kilograms\n 2 - Ounces to Grams\n'))
+                        if mass > 2:
+                            print(stylize('Please enter a number 1 or 2.\n', 'red'))
+                            continue
+                        break
+                    except:
+                        print(stylize('Please enter a number.\n', 'red'))
+
                 if mass == 1:
-                    value_mass = float(input('How many pounds? :\n'))
+                    while True:
+                        try:
+                            value_mass = float(input('How many pounds? :\n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_mass, 'pounds is equal to', round((value_mass * 0.453592), 2), 'kilograms')
                 elif mass == 2:
-                    value_mass = float(input('How many ounces? :\n'))
+                    while True:
+                        try:
+                            value_mass = float(input('How many ounces? :\n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
                     print(value_mass, 'ounces is equal to', round((value_mass * 28.3), 2), 'grams')
 
             # Length conversion
             if conversion_type == 3:
-                length = int(input(' 1 - Miles to Kilometers\n 2 - Yards to Meters\n 3 - Feet to Meters\n '
-                                   '4 - Inches to Centimeters\n'))
+                while True:
+                    try:
+                        length = int(input(' 1 - Miles to Kilometers\n 2 - Yards to Meters\n 3 - Feet to Meters\n '
+                                           '4 - Inches to Centimeters\n'))
+                        if length > 5:
+                            print(stylize('Please enter a number 1 or 2.\n', 'red'))
+                            continue
+                        break
+                    except:
+                        print(stylize('Please enter a number.\n', 'red'))
+
                 if length == 1:
-                    value_length = float(input('How many miles? :\n'))
+                    while True:
+                        try:
+                            value_length = float(input('How many miles? :\n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_length, 'miles =', round((value_length / 0.621371), 2), 'kilometers')
                 elif length == 2:
-                    value_length = float(input('How many yards? :\n'))
+                    while True:
+                        try:
+                            value_length = float(input('How many yards? :\n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_length, 'yards =', round((value_length / 0.9144), 2), 'meters')
                 elif length == 3:
-                    value_length = float(input('How many feet? :\n'))
+                    while True:
+                        try:
+                            value_length = float(input('How many feet? :\n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_length, 'feet =', round((value_length / 3.28084), 2), 'meters')
                 elif length == 4:
-                    value_length = float(input('How many inches? :\n'))
+                    while True:
+                        try:
+                            value_length = float(input('How many inches? :\n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_length, 'inches =', round((value_length / 0.393701), 2), 'centimeters')
 
             # Volume conversion
             if conversion_type == 4:
-                volume = int(input(' 1 - Gallons to Liters\n 2 - Pints to Liters\n'))
+                while True:
+                    try:
+                        volume = int(input(' 1 - Gallons to Liters\n 2 - Pints to Liters\n'))
+                        if volume > 2:
+                            print(stylize('Please enter a number 1 or 2.\n', 'red'))
+                            continue
+                        break
+                    except:
+                        print(stylize('Please enter a number.\n', 'red'))
+
                 if volume == 1:
-                    value_volume = float(input('How many gallons? : \n'))
+                    while True:
+                        try:
+                            value_volume = float(input('How many gallons? : \n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_volume, 'gallons =', round((value_volume * 3.785411784), 2), 'liters')
                 if volume == 2:
-                    value_volume = float(input('How many pints? : \n'))
+                    while True:
+                        try:
+                            value_volume = float(input('How many pints? : \n'))
+                            break
+                        except:
+                            print(stylize('Please enter a number.\n', 'red'))
+
                     print(value_volume, 'pints =', round((value_volume * 0.473176473), 2), 'liters')
 
             # Speed conversion
             if conversion_type == 5:
-                speed = float(input('How many miles per hour? :\n'))
+                while True:
+                    try:
+                        speed = float(input('How many miles per hour? :\n'))
+                        break
+                    except:
+                        print(stylize('Please enter a number.\n', 'red'))
+
                 print(speed, 'miles per hour =', round((speed * 1.60934), 2), 'kilometers per hour')
 
         elif var == 3:
