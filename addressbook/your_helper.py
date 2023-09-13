@@ -1,6 +1,7 @@
 from tabulate import tabulate
 from classes import AddressBook, Phone, Birthday, Email, Address
 from styles import stylize
+import re
 
 
 def main():
@@ -27,8 +28,8 @@ def main():
                 phone_input = input("Enter a phone number (or leave empty to finish adding phones): ")
                 if not phone_input:
                     break
-                normalized_phone = Phone(phone_input).value
-                if normalized_phone:
+                normalized_phone = Phone.normalize_phone(phone_input)
+                if re.match(r'^[\d+\-]{8,17}$', normalized_phone):
                     phones.append(normalized_phone)
                 else:
                     print(stylize("Invalid phone number format. Please enter a valid phone number", 'red'))
@@ -112,6 +113,16 @@ def main():
         elif user_input in ['edit', '4']:
             name = input("Enter the name of the contact to edit: ")
             phone = input("Enter the new phone number (leave empty to keep the same): ")
+            while True:
+                if not phone:
+                    break
+                normalized_phone = Phone.normalize_phone(phone)
+                if re.match(r'^[\d+\-]{8,17}$', normalized_phone):
+                    break
+                else:
+                    print(stylize("Invalid phone number format. Please enter a valid phone number", 'red'))
+                    phone = input("Enter the new phone number (leave empty to keep the same): ")
+
             while True:
                 email = input("Enter the new email address (leave empty to keep the same): ")
                 if not email:
