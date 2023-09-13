@@ -48,8 +48,7 @@ class Phone(Field):
 
         """
         if isinstance(value, str):
-            normalized_value = re.sub(r'[^\d+\-]+', '', value)
-            return normalized_value
+            return re.sub(r'[^\d+\-]+', '', value)
         else:
             return value
 
