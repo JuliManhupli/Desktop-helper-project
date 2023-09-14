@@ -85,7 +85,7 @@ class Talker:
 
             while not stop_thread.is_set():
                 for symbol in animation:
-                    print(' \U0001F50A', end="")
+                    print(' <( ', end="")
                     print(symbol, end="\r")
                     time.sleep(0.1)
 
