@@ -76,7 +76,7 @@ def main():
         elif user_input in ['search', '2', 'find']:
             name_to_search = input("Enter the name or phone number to search: ")
             found_contact = ab.search(name_to_search)
-            print(found_contact)
+
             if found_contact:
                 print(f"\nContact found:")
                 print(f"Name: {found_contact.name.value}")
@@ -161,8 +161,8 @@ def main():
 
         elif user_input in ['exit', '0']:
             ab.save_to_csv()
-            print('\nAll tests passed and data saved!')
-            print('Goodbye! ')
+            print('All tests passed and data saved!')
+            print(stylize("Goodbye!\n", '', 'bold'))
             break
 
         elif user_input not in ['add', 'search', 'list', 'edit', 'delete', 'exit', 'show all', 'find', 'upcoming',

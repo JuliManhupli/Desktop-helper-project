@@ -1,21 +1,4 @@
 {
-    "Reminder about the book": {
-        "date_of_creation": "2023-09-12",
-        "title": "Reminder about the book",
-        "text": "Return the book.",
-        "tags": [],
-        "d_day": null
-    },
-    "Kotlin": {
-        "date_of_creation": "2023-09-12",
-        "title": "Kotlin",
-        "text": "Kotlin is a cross-platform, statically typed, general-purpose high-level programming language with type inference.",
-        "tags": [
-            "Kotlin",
-            "Programming"
-        ],
-        "d_day": null
-    },
     "Team meeting": {
         "date_of_creation": "2023-09-12",
         "title": "Team meeting",
@@ -26,6 +9,13 @@
             "Meet"
         ],
         "d_day": "2023-09-12"
+    },
+    "Reminder about the book": {
+        "date_of_creation": "2023-09-12",
+        "title": "Reminder about the book",
+        "text": "Return the book.",
+        "tags": [],
+        "d_day": null
     },
     "Presentation of the project": {
         "date_of_creation": "2023-09-12",
@@ -38,6 +28,16 @@
             "Python"
         ],
         "d_day": "2023-09-14"
+    },
+    "Kotlin": {
+        "date_of_creation": "2023-09-12",
+        "title": "Kotlin",
+        "text": "Kotlin is a cross-platform, statically typed, general-purpose high-level programming language with type inference.",
+        "tags": [
+            "Kotlin",
+            "Programming"
+        ],
+        "d_day": null
     },
     "Infographics": {
         "date_of_creation": "2023-09-12",

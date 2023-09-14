@@ -1,4 +1,4 @@
-from addressbook.your_helper import main as addressbook_start
+from addressbook.address_book import main as addressbook_start
 from notebook.notebook import start as notebook_start
 from calculator.main_calc import main as calculator_start
 from sortfolder.sortfolder import start as sortfolder_start
