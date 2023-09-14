@@ -289,7 +289,7 @@ class AddressBook(UserDict):
                         new_contact.email = new_email
                     self.data[name] = new_contact
                 else:
-                    print(f"Contact '{name}' already exists!")
+                    print(stylize(f"Contact '{name}' already exists!", 'yellow'))
 
     def add_contact(self, name, phones=None, email=None, birthday=None, address=None):
         """
@@ -332,7 +332,7 @@ class AddressBook(UserDict):
 
             self.data[name] = new_contact
         else:
-            print("Contact already exists!")
+            print(stylize("Contact already exists!", 'yellow'))
         self.save_to_csv()
 
     def delete_contact(self, name):
@@ -369,7 +369,7 @@ class AddressBook(UserDict):
                     new_email = Email(email)
                     contact.email = new_email
                 else:
-                    print("Invalid email address.")
+                    print(stylize("Invalid email address.", 'red'))
             if address:
                 contact.address = Address(address)
 
@@ -380,22 +380,32 @@ class AddressBook(UserDict):
 
     def search(self, query):
         """
-            Searches for a contact based on a query.
+        Searches for a contact based on a query.
 
-            Args:
-            query (str): The query to search for in contact names or phone numbers.
+        Args:
+        query (str): The query to search for in contact names or phone numbers.
 
-            Returns:
-            Record: The contact record that matches the query or None if no match is found.
+        Returns:
+        Record: The contact record that exactly matches the query or None if no match is found.
         """
 
+        exact_matches = []
+
+
         for record in self.data.values():
-            if query.lower() in record.name.value.lower():
+            if query.lower() == record.name.value.lower():
                 return record
             else:
                 for phone in record.phones.value.split(', '):
-                    if query in phone:
-                        return record
+                    if query == phone:
+                        exact_matches.append(record)
+
+        if len(exact_matches) == 1:
+            return exact_matches[0]
+        elif len(exact_matches) > 1:
+            print(stylize("Multiple exact matches found. Please provide a more specific query.", 'yellow'))
+            return None
+
         return None
 
     def find_upcoming_birthdays(self, days):
