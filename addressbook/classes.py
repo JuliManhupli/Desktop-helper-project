@@ -388,7 +388,9 @@ class AddressBook(UserDict):
         Returns:
         Record: The contact record that exactly matches the query or None if no match is found.
         """
+
         exact_matches = []
+
 
         for record in self.data.values():
             if query.lower() == record.name.value.lower():

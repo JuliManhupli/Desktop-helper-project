@@ -7,7 +7,7 @@ from styles import stylize
 cities = [
     {"name": "Kyiv", "latitude": 50.4501, "longitude": 30.5234},
     {"name": "Kharkiv", "latitude": 49.9808, "longitude": 36.2527},
-    {"name": "Odessa", "latitude": 46.4825, "longitude": 30.7233},
+    {"name": "Odesa", "latitude": 46.4825, "longitude": 30.7233},
     {"name": "Dnipro", "latitude": 48.4647, "longitude": 35.0462},
     {"name": "Donetsk", "latitude": 48.0159, "longitude": 37.8029},
     {"name": "Zaporizhzhia", "latitude": 47.8388, "longitude": 35.1396},
@@ -106,10 +106,10 @@ def get_weather(city):
             table_hourly.append([filtered_times[i], filtered_temperature[i], filtered_apparent_temperature[i],
                                  filtered_cloudcover[i], filtered_precipitation_probability[i]])
 
-        print(f"Weather forecast for {city['name']} on {today.date()} (Hourly):")
+        print(stylize(f"Weather forecast for {city['name']} on {today.date()} (Hourly):", '', 'bold'))
         print(tabulate(table_hourly, headers="firstrow", tablefmt="grid", colalign=colalign_hourly))
 
-        print(f"Current Weather in {city['name']} at {today.strftime('%H:%M')}:")
+        print(stylize(f"Current Weather in {city['name']} at {today.strftime('%H:%M')}:", '', 'bold'))
         print(f"Temperature: {current_temperature}°C")
         print(f"Wind speed: {wind_speed} km/h")
 
@@ -138,7 +138,8 @@ def get_weather(city):
             max_temp = max(day_data["temperature"])
             min_temp = min(day_data["temperature"])
             table_daily.append([date.strftime("%Y-%m-%d"), max_temp, min_temp])
-        print("\nWeather forecast for the next 3 days:")
+
+        print(stylize("\nWeather forecast for the next 3 days:", '', 'bold'))
         print(tabulate(table_daily, headers="firstrow", tablefmt="grid", colalign=colalign))
 
     else:
@@ -156,16 +157,17 @@ def list_cities():
         Returns:
             None: This function does not return a value; it prints the list of city names to the console.
     """
-    print("\nList of available cities:")
+    print(stylize("\nList of available cities:", '', 'bold'))
     for city in cities:
-        print(city["name"])
+        print("• " + city["name"])
 
 
 def main():
+    print(stylize("\nWelcome to the weather forecast!", 'white', 'bold'))
     while True:
         while True:
-            print("\nEnter the name of a city in Ukraine or enter 'check city' to see the list of cities:")
-            user_input = input().strip().lower()
+            print("Enter the name of a city in Ukraine or enter 'check city' to see the list of cities:")
+            user_input = input(">>> ").strip().lower()
 
             if user_input == "check city":
                 list_cities()
@@ -181,7 +183,8 @@ def main():
                 get_weather(selected_city)
                 break
             else:
-                print(stylize("City not found. Please enter a valid city name or 'check city' to see the list of cities.", 'red'))
+                print(stylize("City not found. Please enter a valid city name or 'check city' to see the list of "
+                              "cities.", 'red'))
 
         while True:
             choice = input(stylize("\nDo you want to check the weather for another city? (Yes/No): ", 'yellow'))
@@ -191,8 +194,7 @@ def main():
             elif choice.strip().lower() in ('yes', 'y', '+'):
                 break
             else:
-                print(stylize('\nInvalid command. Please enter "yes" or "no" to continue using the application.', 'red'))
-
+                print(stylize('Invalid command. Please enter "yes" or "no" to continue using the application.', 'red'))
 
 
 if __name__ == '__main__':
