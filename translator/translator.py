@@ -1,4 +1,4 @@
-from .classes import Translator as ts, Talker as talk
+from .classes import Translator_en_uk as ts, Talker as talk
 from styles import stylize
 
 
@@ -72,4 +72,3 @@ def start() -> None:
             say_text()
         else:
             print(stylize("The command is incorrect.\n", 'red'))
-
