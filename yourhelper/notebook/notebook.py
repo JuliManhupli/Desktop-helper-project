@@ -1,5 +1,5 @@
 from datetime import datetime
-from styles import stylize
+from yourhelper.styles import stylize
 
 try:
     from classes import Note, Notebook
@@ -230,7 +230,7 @@ def edit_note() -> str:
                 else:
                     print(stylize("Invalid input.", 'red'))
 
-            NOTEBOOK.save_to_json('notebook/notebook.json')
+            NOTEBOOK.save_to_json('notebook.json')
             return stylize(f"Note '{title}' edited successfully.\n", '', 'bold')
 
 
@@ -345,7 +345,7 @@ def start() -> None:
     global NOTEBOOK
 
     try:
-        loaded_notebook = Notebook.load_from_json('notebook/notebook.json')
+        loaded_notebook = Notebook.load_from_json('notebook.json')
 
         NOTEBOOK = loaded_notebook
     except FileNotFoundError:
@@ -354,7 +354,7 @@ def start() -> None:
     try:
         main()
     finally:
-        NOTEBOOK.save_to_json('notebook/notebook.json')
+        NOTEBOOK.save_to_json('notebook.json')
 
 
 if __name__ == '__main__':

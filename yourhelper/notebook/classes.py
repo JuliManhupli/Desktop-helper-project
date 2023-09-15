@@ -42,7 +42,7 @@ class Notebook(UserDict):
         :param note: The Note object to be added to the notebook.
         """
         self.data[note.title] = note
-        self.save_to_json('notebook/notebook.json')
+        self.save_to_json('notebook.json')
 
     def delete_note(self, note: Note) -> None:
         """
@@ -52,7 +52,7 @@ class Notebook(UserDict):
         """
         if note.title in self.data:
             del self.data[note.title]
-            self.save_to_json('notebook/notebook.json')
+            self.save_to_json('notebook.json')
 
     def show_all(self) -> None:
         """

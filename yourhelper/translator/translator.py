@@ -1,5 +1,5 @@
 from .classes import Translator_en_uk as ts, Talker as talk
-from styles import stylize
+from yourhelper.styles import stylize
 
 
 def translate(from_leng: str, to_leng: str) -> None:

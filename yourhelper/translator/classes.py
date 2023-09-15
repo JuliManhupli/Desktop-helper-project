@@ -2,7 +2,7 @@ import translators
 import pyttsx3
 import time
 import threading
-from styles import stylize
+from yourhelper.styles import stylize
 import gtts
 from playsound import playsound
 import os

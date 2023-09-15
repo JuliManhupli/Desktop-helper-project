@@ -1,5 +1,5 @@
 from tabulate import tabulate
-from styles import stylize
+from yourhelper.styles import stylize
 import re
 
 try:
@@ -9,7 +9,7 @@ except ModuleNotFoundError:
 
 
 def main():
-    ab = AddressBook('addressbook/address_book_data.csv')
+    ab = AddressBook('address_book_data.csv')
     while True:
         print("\nAvailable commands:")
         print("1. 'add' or '1'                    ->  Add a new contact")

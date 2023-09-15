@@ -1,6 +1,6 @@
 from tabulate import tabulate
 
-from styles import stylize
+from yourhelper.styles import stylize
 
 
 def calories_intake_per_day(weight: float, height: float, age: float, human_activity_indicator: float,
@@ -117,3 +117,7 @@ def main():
     table = tabulate(data, headers, tablefmt="grid", colalign=colalign)
     print(table)
     print(stylize("NOW LETS GO TO THE GYM!!!\n", 'cyan'))
+
+
+if __name__ == "__main__":
+    main()
