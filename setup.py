@@ -1,7 +1,7 @@
 from setuptools import setup, find_namespace_packages
 
 setup(name='yourhelper',
-      version='0.0.2',
+      version='0.0.4',
       description='YourHelper is a Python application that provides various tools and utilities in one place.',
       long_description=open("README.md", "r", encoding="utf-8").read(),
       long_description_content_type="text/markdown",
