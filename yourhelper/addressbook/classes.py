@@ -6,6 +6,66 @@ import csv
 from yourhelper.styles import stylize
 
 
+class UserPath:
+
+    def __init__(self):
+        pass
+
+    def get_path_from_user(self) -> tuple[str, str]:
+        while True:
+            print("1. Select an existing book")
+            print("2. Create a new one")
+            print("0. Return to main")
+            user_input = input("Enter a number: ")
+
+            if user_input == "0":
+                return user_input, "Exit"
+
+            while True:
+                if user_input == "1":
+
+                    print('Specify the full path to the book or enter "Back" to return to the previous menu:')
+                    path = input('>>> ')
+
+                    if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
+                        print()
+                        break
+
+                    if os.path.exists(path):
+                        return user_input, path
+
+                    else:
+                        print(stylize("Such a path does not exist.\n", 'red'))
+
+                elif user_input == "2":
+
+                    print('Specify the path to folder where to save the book or enter "Back" to return to the '
+                          'previous menu:')
+                    path = input('>>> ')
+
+                    if path.lower() in ('back', "exit", "close", 'quit', 'q', '0'):
+                        print()
+                        break
+
+                    if os.path.exists(path):
+                        print("What do you want to name the file?")
+                        filename = input('>>> ')
+
+                        pattern = r'[\/:*?<>|]'
+                        if filename and not re.search(pattern, filename):
+                            return user_input, os.path.join(path, filename + ".bin")
+
+                        else:
+                            print(stylize("The file name is incorrect.\n", 'red'))
+                    else:
+                        print(stylize("Such a path does not exist.\n", 'red'))
+
+                else:
+                    print(stylize("The command is incorrect.\n", 'red'))
+
+
+
+
 class Field:
     def __init__(self, value):
         self.value = value
