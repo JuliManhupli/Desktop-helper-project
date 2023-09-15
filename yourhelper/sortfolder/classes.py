@@ -2,7 +2,7 @@ import os
 import py7zr
 import shutil
 from string import ascii_letters, digits
-from styles import stylize
+from yourhelper.styles import stylize
 
 TRANSLITERATION = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
                    'з': 'z', 'и': 'y', 'і': 'i', 'ї': 'yi', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',

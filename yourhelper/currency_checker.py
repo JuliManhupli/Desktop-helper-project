@@ -1,7 +1,7 @@
 import requests
 import json
 from tabulate import tabulate
-from styles import stylize
+from yourhelper.styles import stylize
 
 currency_translations = {
     'USD': 'US Dollar',

@@ -1,6 +1,6 @@
 from .classes import SortFolder, NormalizeName, UnpackArchive
 import os
-from styles import stylize
+from yourhelper.styles import stylize
 
 
 def sort_folder_run() -> None:
