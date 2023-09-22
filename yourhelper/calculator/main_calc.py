@@ -1,4 +1,4 @@
-from styles import stylize
+from yourhelper.styles import stylize
 import requests
 
 try:

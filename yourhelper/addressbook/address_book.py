@@ -1,5 +1,7 @@
+from pathlib import Path
+
 from tabulate import tabulate
-from styles import stylize
+from yourhelper.styles import stylize
 import re
 
 try:
@@ -9,7 +11,8 @@ except ModuleNotFoundError:
 
 
 def main():
-    ab = AddressBook('addressbook/address_book_data.csv')
+    documents_path = Path.home() / 'Documents' / 'address_book_data.csv'
+    ab = AddressBook(documents_path)
     while True:
         print("\nAvailable commands:")
         print("1. 'add' or '1'                    ->  Add a new contact")
@@ -171,5 +174,4 @@ def main():
 
 
 if __name__ == '__main__':
-    ab = AddressBook('address_book_data.csv')
     main()
