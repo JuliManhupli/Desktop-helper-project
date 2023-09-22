@@ -1,10 +1,13 @@
 import json
 from collections import UserDict, Counter
+import platform
+from pathlib import Path
+
 from tabulate import tabulate
 
 
 class Note:
-    
+
     def __init__(self, date_of_creation, title, text, tags=None, d_day=None):
         """
         Initialize a Note object.
@@ -34,6 +37,7 @@ class Note:
 
 class Notebook(UserDict):
     N = 10
+    documents_path = Path.home() / 'Documents' / "notebook.json"
 
     def add_note(self, note: Note) -> None:
         """
@@ -42,7 +46,7 @@ class Notebook(UserDict):
         :param note: The Note object to be added to the notebook.
         """
         self.data[note.title] = note
-        self.save_to_json('notebook/notebook.json')
+        self.save_to_json()
 
     def delete_note(self, note: Note) -> None:
         """
@@ -52,7 +56,7 @@ class Notebook(UserDict):
         """
         if note.title in self.data:
             del self.data[note.title]
-            self.save_to_json('notebook/notebook.json')
+            self.save_to_json()
 
     def show_all(self) -> None:
         """
@@ -99,11 +103,9 @@ class Notebook(UserDict):
         self.data = {note.title: note for note in sorted_notes}
         self.show_all()
 
-    def save_to_json(self, filename: str) -> None:
+    def save_to_json(self) -> None:
         """
         Save the notebook's data to a JSON file.
-
-        :param filename: The name of the JSON file to save the data to.
         """
         data = {}
         for key, note in self.data.items():
@@ -116,21 +118,22 @@ class Notebook(UserDict):
             }
 
         try:
-            with open(filename, 'w') as file:
+            with open(Notebook.documents_path, 'w') as file:
                 json.dump(data, file, indent=4)
         except Exception as e:
             print(f"An error occurred while saving data: {str(e)}")
 
     @classmethod
-    def load_from_json(cls, filename: str):
+    def load_from_json(cls):
         """
         Load a notebook's data from a JSON file and create a Notebook object.
 
-        :param filename: The name of the JSON file to load data from.
         :return: A Notebook object containing the loaded data.
         """
         try:
-            with open(filename, 'r') as file:
+            with open(Notebook.documents_path, 'r') as file:
+            # file_path = r"C:\Users\admin\Documents\notebook.json"
+            # with open(file_path, 'r') as file:
                 data = json.load(file)
             notebook = cls()
 
@@ -145,7 +148,7 @@ class Notebook(UserDict):
                 notebook.add_note(note)
             return notebook
         except FileNotFoundError:
-            print(f"File '{filename}' not found.")
+            print(f"File '{Notebook.documents_path}' not found.")
             return cls()
 
     def __iter__(self):
@@ -168,7 +171,6 @@ class Notebook(UserDict):
             table_data = []
             max_text_width = 50
             for note in self.values[self.current_index:self.current_index + self.N]:
-
                 text_parts = [note.text[i:i + max_text_width] for i in range(0, len(note.text), max_text_width)]
                 text = '\n'.join(text_parts)
 

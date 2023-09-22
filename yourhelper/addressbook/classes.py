@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 import re
 import csv
-from styles import stylize
+from yourhelper.styles import stylize
 
 
 class Field:

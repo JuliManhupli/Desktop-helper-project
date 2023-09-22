@@ -34,6 +34,9 @@ You can install YourHelper from TestPyPI using pip:
 pip install -i https://test.pypi.org/simple/ yourhelper
 ```
 
+> **_Issues:_** There may be problems with automatically install dependencies that are not available on TestPyPi. You will need to install them manually.
+
+
 ## Usage
 
 To use YourHelper, follow these steps:
@@ -61,3 +64,4 @@ This project came to life thanks to:
 - [Sergiy-Glookh](https://github.com/Sergiy-Glookh).
 - [Korniev](https://github.com/Korniev).
 - [MaxLiger](https://github.com/MaxLiger).
+

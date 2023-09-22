@@ -2,7 +2,7 @@ import requests
 import json
 from tabulate import tabulate
 from datetime import datetime, timedelta
-from styles import stylize
+from yourhelper.styles import stylize
 
 cities = [
     {"name": "Kyiv", "latitude": 50.4501, "longitude": 30.5234},

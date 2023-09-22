@@ -1,12 +1,12 @@
-from addressbook.address_book import main as addressbook_start
-from notebook.notebook import start as notebook_start
-from calculator.main_calc import main as calculator_start
-from sortfolder.sortfolder import start as sortfolder_start
-from translator.translator import start as translator_start
-from calories_calculator import main as calories_calculator_start
-from weather_forecast import main as weather_forecast_start
-from currency_checker import exchange_rate_start
-from styles import stylize
+from yourhelper.addressbook.address_book import main as addressbook_start
+from yourhelper.notebook.notebook import start as notebook_start
+from yourhelper.calculator.main_calc import main as calculator_start
+from yourhelper.sortfolder.sortfolder import start as sortfolder_start
+from yourhelper.translator.translator import start as translator_start
+from yourhelper.calories_calculator import main as calories_calculator_start
+from yourhelper.weather_forecast import main as weather_forecast_start
+from yourhelper.currency_checker import exchange_rate_start
+from yourhelper.styles import stylize
 
 applications = (("Address book", addressbook_start),
                 ("Notebook", notebook_start),
