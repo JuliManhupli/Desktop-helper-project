@@ -1,4 +1,4 @@
-from .classes import Translator_en_uk as ts, Talker as talk
+from .classes import TranslatorEnUk as ts, Talker as talk
 from yourhelper.styles import stylize
 
 
