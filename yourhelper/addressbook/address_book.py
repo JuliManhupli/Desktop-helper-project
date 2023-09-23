@@ -95,7 +95,7 @@ def main():
 
         elif user_input in ['list', '3', 'show all']:
             table_data = []
-            for contact in ab.data.values():
+            for contact in ab.show_all():
                 row = [
                     contact.name.value,
                     contact.phones.value,

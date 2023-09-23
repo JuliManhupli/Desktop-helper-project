@@ -1,9 +1,18 @@
 from collections import UserDict
-import os
 from datetime import datetime
+from abc import abstractmethod, ABC
+import os
 import re
 import csv
+
 from yourhelper.styles import stylize
+
+
+class Book(ABC):
+
+    @abstractmethod
+    def show_all(self):
+        pass
 
 
 class Field:
@@ -28,6 +37,7 @@ class Phone(Field):
         normalize_phone(value): Static method to normalize a phone number string.
         __str__(self): Returns the phone number as a string.
     """
+
     def __init__(self, value=None):
         super().__init__(value)
         if value is not None:
@@ -85,6 +95,7 @@ class Email(Field):
         __init__(self, value): Initializes an Email instance with an initial value.
         validate_email(email): Static method to validate an email address.
         """
+
     def __init__(self, value):
         super().__init__(value)
         self.value = self.validate_email(value)
@@ -196,7 +207,7 @@ class Record:
         return self.phones.value if self.phones.value else 'No phone numbers'
 
 
-class AddressBook(UserDict):
+class AddressBook(UserDict, Book):
     """
         Represents an address book for storing and managing contact records.
 
@@ -391,7 +402,6 @@ class AddressBook(UserDict):
 
         exact_matches = []
 
-
         for record in self.data.values():
             if query.lower() == record.name.value.lower():
                 return record
@@ -435,3 +445,6 @@ class AddressBook(UserDict):
                     upcoming_birthdays.append(record)
 
         return upcoming_birthdays
+
+    def show_all(self):
+        return self.data.values()
