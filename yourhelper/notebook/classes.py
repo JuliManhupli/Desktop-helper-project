@@ -1,9 +1,9 @@
-import json
 from collections import UserDict, Counter
-import platform
 from pathlib import Path
-
+import json
 from tabulate import tabulate
+
+from yourhelper.addressbook.classes import Book
 
 
 class Note:
@@ -35,7 +35,7 @@ class Note:
         return f"Title: {self.title}\nText: {self.text}\nTags: {', '.join(self.tags)}"
 
 
-class Notebook(UserDict):
+class Notebook(UserDict, Book):
     N = 10
     documents_path = Path.home() / 'Documents' / "notebook.json"
 
@@ -132,8 +132,8 @@ class Notebook(UserDict):
         """
         try:
             with open(Notebook.documents_path, 'r') as file:
-            # file_path = r"C:\Users\admin\Documents\notebook.json"
-            # with open(file_path, 'r') as file:
+                # file_path = r"C:\Users\admin\Documents\notebook.json"
+                # with open(file_path, 'r') as file:
                 data = json.load(file)
             notebook = cls()
 
