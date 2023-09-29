@@ -26,7 +26,7 @@ if you have problems installing playsound, you need to update wheel:
 """
 
 
-class Translator_en_uk:
+class TranslatorEnUk:
     """Translates text from one language to another."""
 
     def __init__(self, query_text: str, from_language: str, to_language: str) -> None:
