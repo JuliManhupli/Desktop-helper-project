@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "desktop-helper-project"
+version = "0.1.0"
+description = ""
+authors = ["Max_Ligr <63448349+MaxLiger@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.3"
+requests = "2.31.0"
+tabulate = "0.9.0"
+translate = "3.6.1"
+py7zr = "0.20.6"
+translators = "5.8.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
