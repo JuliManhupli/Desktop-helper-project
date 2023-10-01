@@ -37,7 +37,8 @@ class Note:
 
 class Notebook(UserDict, Book):
     N = 10
-    documents_path = Path.home() / 'Documents' / "notebook.json"
+    # documents_path = Path.home() / 'Documents' / "notebook.json"
+    documents_path = 'yourhelper/notebook/notebook.json'
 
     def add_note(self, note: Note) -> None:
         """

@@ -1,17 +1,6 @@
 import translators
-import pyttsx3
-import time
-import threading
 from yourhelper.styles import stylize
-import gtts
-from playsound import playsound
-import os
-import subprocess
-import platform
 from translate import Translator
-if platform.system() == 'Linux':
-    from pydub import AudioSegment
-    from pydub.playback import play
 
 
 """
@@ -65,77 +54,3 @@ class TranslatorEnUk:
                 return translator.translate(self.query_text)
             except:
                 return stylize("I can't translate it.", 'red')
-
-
-class Talker:
-    """Speaks text aloud."""
-
-    @staticmethod
-    def speak_up(phrase: str) -> None:
-        """Speak the given phrase aloud.
-
-        Args:
-            phrase (str): The phrase to speak.
-        """
-
-        def animate() -> None:
-            """Show an animation while text is being spoken."""
-
-            animation = ["   ", ")", "))", ")))", " ))", "  )", "   "]
-
-            while not stop_thread.is_set():
-                for symbol in animation:
-                    print(' <( ', end="")
-                    print(symbol, end="\r")
-                    time.sleep(0.1)
-
-        try:
-            engine = pyttsx3.init()
-            engine.setProperty("rate", 110)
-            engine.say(phrase)
-
-            stop_thread = threading.Event()
-            animation_thread = threading.Thread(target=animate)
-            animation_thread.start()
-
-            engine.runAndWait()
-
-            stop_thread.set()
-
-        except:
-            count = 0
-            while True:
-                try:
-                    tts = gtts.gTTS(phrase)
-                    tts.save("speak.mp3")
-
-                    stop_thread = threading.Event()
-                    animation_thread = threading.Thread(target=animate)
-                    animation_thread.start()
-
-                    if platform.system() == 'Darwin':
-                        subprocess.call(["afplay", "speak.mp3"])
-                    elif platform.system() == 'Linux':
-                        audio = AudioSegment.from_mp3("speak.mp3")
-                        play(audio)
-                    elif platform.system() == 'Windows':
-                        playsound("speak.mp3")
-
-
-                    if os.path.exists ("speak.mp3"):
-                        os.remove ("speak.mp3")
-
-                    stop_thread.set()
-
-                    break
-
-                except:
-
-                    count += 1
-                    if count > 3:
-                        print("i can't pronounce it")
-                        break
-                    time.sleep(2)
-        finally:
-            time.sleep(0.8)
-            print('\r\033[K', end="")
