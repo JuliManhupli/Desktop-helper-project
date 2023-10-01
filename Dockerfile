@@ -1,4 +1,4 @@
-FROM python:3.11.5-slim
+FROM python:3.11.5
 
 ENV YOURHELPER_HOME /yourhelper
 
@@ -11,5 +11,7 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false && poetry install --only main
 
 ENV PYTHONPATH "/yourhelper/${PYTHONPATH}"
+
+COPY . .
 
 ENTRYPOINT ["python", "yourhelper/main.py"]
